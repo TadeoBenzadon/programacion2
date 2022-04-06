@@ -5,7 +5,17 @@ const productController = {
         return res.render('product', {
             
         })
-    }
+    },
+    add: function(req,res){
+        return res.render('productAdd', {
+            
+        })
+    },
+    search: function(req,res){
+        return res.render('productSearch', {
+            
+        })
+    },
 }
 
 module.exports = productController; 
