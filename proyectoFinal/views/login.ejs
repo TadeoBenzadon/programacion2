@@ -8,10 +8,12 @@
 	<%- include('partials/headerNoLogeado.ejs') %> 
 
 	<!-- Novedades -->
-
+    <div class="col-12">
+        <h2 class="products-title">Ingresá</h2>
+    </div>
 			<!-- Show the "ultimos" products -->
 			<div>
-			<form action="../routes/index.js" method="GET">
+			<form class= "formAngie" action="../routes/index.js" method="GET">
                 <div>
                     <label for="nombre">Usuario:</label>
             <input id="usuario" type="text" name="usuario" value="">
@@ -21,7 +23,7 @@
             <input id="contraseña" type="contraseña" name="contraseña" value="">
             </div>
             <div>
-                <label for="email">Contraseña:</label>
+                <label for="email">Recordame:</label>
             <input type="checkbox" name="recordame" value=""> 
         </div>
             <div>

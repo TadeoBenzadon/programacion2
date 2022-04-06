@@ -68,7 +68,7 @@ hr {
 /*====== Main Header ======*/
 .main-header {
   padding: 15px 0;
-  background-color: var(--yellow);
+  background-color: crimson;
 }
 
 .main-header_home-link,
@@ -474,6 +474,15 @@ textarea.form-input {
   padding: 10px 20px;
   border-radius: 4px;
   color: #fff;
+}
+.formAngie div {
+  display: flex;
+  padding: 2px;
+  border: 30px;
+  align-items: center;
+  font-size: 30px;
+  justify-content: center;
+  margin: 50px;
 }
 
 

@@ -12,12 +12,12 @@ const productController = {
         })
     },
     search: function(req,res){
-        return res.render('productSearch', {
+        return res.render('search', {
             
         })
     },
     edit: function(req,res){
-        return res.render('productSearch', {
+        return res.render('productEdit', {
             
         })
     }
