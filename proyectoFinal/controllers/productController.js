@@ -17,7 +17,7 @@ const productController = {
         })
     },
     edit: function(req,res){
-        return res.render('productedit', {
+        return res.render('productSearch', {
             
         })
     }
