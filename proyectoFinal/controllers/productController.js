@@ -16,6 +16,11 @@ const productController = {
             
         })
     },
+    edit: function(req,res){
+        return res.render('productedit', {
+            
+        })
+    }
 }
 
 module.exports = productController; 

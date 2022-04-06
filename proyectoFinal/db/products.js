@@ -32,31 +32,31 @@ const products = {
     },
     {
         //imagen:,
-        nombre: "Heladera",
+        nombre: "aspiradora",
         descripcion:"",
         fechaDeCarga: 3/04/2022,
     },
     {
         //imagen:,
-        nombre: "Heladera",
+        nombre: "batidora",
         descripcion:"",
         fechaDeCarga: 3/04/2022,
     },
     {
         //imagen:,
-        nombre: "Heladera",
+        nombre: "plancha",
         descripcion:"",
         fechaDeCarga: 3/04/2022,
     },
     {
         //imagen:,
-        nombre: "Heladera",
+        nombre: "balanza",
         descripcion:"",
         fechaDeCarga: 3/04/2022,
     },
     {
         //imagen:,
-        nombre: "Heladera",
+        nombre: "tostadora",
         descripcion:"",
         fechaDeCarga: 3/04/2022,
     }
