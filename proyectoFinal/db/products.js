@@ -20,7 +20,7 @@ const products = {
     },
     {
         //imagen:,
-        nombre: "Cafetera",
+        nombre: "Cafetera HOLAAAAA",
         descripcion:"cafetera liliana ac950 cofly", 
         fechaDeCarga: 3/04/2022,
     },
