@@ -1,6 +1,7 @@
 const products = {
     lista:[
         {
+        id: 0 ,
         imagen: "/stylesheets/images/heladera.png",
         nombre: "Heladera",
         descripcion:"Heladera Electrolux Inverter 4 puertas modelo DM90X",

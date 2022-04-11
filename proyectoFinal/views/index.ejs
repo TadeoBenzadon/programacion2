@@ -19,180 +19,31 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="products-title">Novedades</h2>
+			<h2 class="products-title">Productos</h2> 
 			</div>
 			<!-- Show the "ultimos" products -->
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%=productos[0].imagen%>" alt="Heladera">
-						</figure>
+			<% for(let i=0; i<productos.length; i++){%>
 
-						<article class="product-box_data">
-							<h2><%=productos[0].nombre%></h2>
-							<p><%=productos[0].descripcion%></p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%=productos[1].imagen%>" alt="Horno">
-						</figure>
-
-						<article class="product-box_data">
-							<h2><%=productos[1].nombre%></h2>
-							<p><%=productos[1].descripcion%></p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%=productos[2].imagen%>" alt="Pava electrica">
-						</figure>
-						<article class="product-box_data">
-							<h2><%=productos[2].nombre%></h2>
-							<p><%=productos[2].descripcion%></p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-
-				</section>
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%=productos[3].imagen%>" alt="Cafetera">
-						</figure>
-						<article class="product-box_data">
-							<h2><%=productos[3].nombre%></h2>
-							<p><%=productos[3].descripcion%></p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-
-				</section>
-			</div>
-
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%=productos[4].imagen%>" alt="Microondas">
-						</figure>
-						<article class="product-box_data">
-							<h2><%=productos[4].nombre%></h2>
-							<p><%=productos[4].descripcion%></p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-
-				</section>
-			</div>
-
-		</div>
-	</div>
-	<!-- /Novedades -->
-	<!-- Más comentados -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Más comentados</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%=productos[5].imagen%>" alt="Aspiradora">
-						</figure>
-						<article class="product-box_data">
-							<h2><%=productos[5].nombre%></h2>
-							<p><%=productos[5].descripcion%></p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%=productos[6].imagen%>" alt="Batidora">
-						</figure>
-						<article class="product-box_data">
-							<h2><%=productos[6].nombre%></h2>
-							<p><%=productos[6].descripcion%></p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%=productos[7].imagen%>" alt="Plancha">
-						</figure>
-						<article class="product-box_data">
-							<h2><%=productos[7].nombre%></h2>
-							<p><%=productos[7].descripcion%></p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-
-			</div>
-			<div class="col-12 col-sm-6 col-lg-3">
-				<section class="product-box">
-					<a href="/product">
-						<figure class="product-box_image">
-							<img src="<%=productos[8].imagen%>" alt="Balanza">
-						</figure>
-						<article class="product-box_data">
-							<h2><%=productos[8].nombre%></h2>
-							<p><%=productos[8].descripcion%></p>
-							<p>Comentarios: 12</p>
-						</article>
-					</a>
-				</section>
-				
-			</div>
-
-		</div>
-		<div class="col-12 col-sm-6 col-lg-3">
-			<section class="product-box">
-				<a href="/product">
-					<figure class="product-box_image">
-						<img src="<%=productos[9].imagen%>" alt="Tostadora">
-					</figure>
-					<article class="product-box_data">
-						<h2><%=productos[9].nombre%></h2>
-						<p><%=productos[9].descripcion%></p>
-						<p>Comentarios: 12</p>
-					</article>
-				</a>
-			</section>
 			
-		</div>
+			<div class="col-12 col-sm-6 col-lg-3">
+				<section class="product-box">
+					<a href="/product">
+						<figure class="product-box_image">
+							<img src="<%=productos[i].imagen%>" alt="Heladera">
+						</figure>
 
+						<article class="product-box_data">
+							<h2><%=productos[i].nombre%></h2>
+							<p><%=productos[i].descripcion%></p>
+							<p>Comentarios: 12</p>
+						</article>
+					</a>
+				</section>
+			</div>
+			<%}%>
 		</div>
 	</div>
-	<!-- /Más comentados -->
-
-
+	
 	<!-- footer -->
 	<%- include('partials/footer.ejs') %> 
 	<!-- /footer -->
