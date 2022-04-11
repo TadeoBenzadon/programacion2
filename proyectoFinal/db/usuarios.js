@@ -6,7 +6,7 @@ const usuarios = {
         contraseña: "moni12345",
         fechaDeNacimiento: 14/04/1998,
         dni: 23767799,
-       // fotoDePerfil: 
+       fotoDePerfil: "/stylesheets/images/fotoPerfil"
     }]
 }
 
