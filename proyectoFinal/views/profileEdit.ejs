@@ -14,13 +14,36 @@
 			<div class="col-12">
 				<h2 class="products-title">Editar mi perfil</h2>
 			</div>
-			<!-- Show the "ultimos" products -->
-			<h2 class="col-12"> <i>///////////////////////////////////////// <br> Acá va el formulario de edición de datos del perfil de usuario. <br>
-			Debe cumplir con los puntos de la consigna y ser coherente con la tabla de la base de datos deñ usuario<br>
-			Eliminen estás líneas y coloquen el formulario. <br>
-			Recuerden todo lo que necesita tanto la etiqueta form como los campos input para operar correctamtente</i> <br>
-			////////////////
-			</h2>
+			<form class= "formAngie" action="/usuarios" method="GET">
+				<div>
+					<label for="email">Email:</label>
+			<input id="email" type="text" name="email" value="">
+			</div>
+				<div>
+					<label for="usuario">Usuario:</label>
+			<input id="usuario" type="text" name="usuario" value="">
+			</div>
+			<div>
+				<label for="contraseña">Contraseña:</label>
+		<input id="contraseña" type="contraseña" name="contraseña" value="">
+		</div>
+		<div>
+			<label for="fechaDeNacimiento">Fecha de nacimiento:</label>
+	<input id="fecha" type="text" name="fecha" value="">
+	</div>
+	<div>
+		<label for="email">DNI:</label>
+<input id="dni" type="number" name="dni" value="">
+</div>
+<div>
+	<label for="email">Foto de perfil:</label>
+<input id="contraseña" type="contraseña" name="contraseña" value="">
+</div>
+			
+			<div>
+					<button type="submit">Enviar</button> 
+			</div>
+			</form>
 
 
 	<!-- footer -->
