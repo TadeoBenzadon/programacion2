@@ -4,7 +4,7 @@ const products = {
         //imagen:,
         nombre: "Heladera",
         descripcion:"",
-        fechaDeCarga: 3/04/2022,
+        fechaDeCarga: 3/04/2022
     },
     {
         //imagen:,

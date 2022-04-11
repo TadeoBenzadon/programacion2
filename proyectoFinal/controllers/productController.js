@@ -20,6 +20,12 @@ const productController = {
         return res.render('productEdit', {
             
         })
+    },
+    comentarios: function(req,res){
+        return res.render('product', {
+            
+        })
+        
     }
 }
 
