@@ -11,9 +11,6 @@ const productController = {
     },
     search: function(req,res){
         return res.render('search', {productos: products.lista})
-    },
-    edit: function(req,res){
-        return res.render('productEdit',  {productos: products.lista})
     }
 }
 
