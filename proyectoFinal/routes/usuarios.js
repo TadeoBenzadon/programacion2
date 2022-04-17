@@ -1,6 +1,6 @@
 var express = require('express');
-const usuariosController = require('../controllers/usuariosController')
 var router = express.Router();
+const usuariosController = require('../controllers/usuariosController')
 
 /* GET home page. */
 router.get('/', usuariosController.login); 
