@@ -1,5 +1,5 @@
-const products = require("../db/products")
-const comentarios = require("../db/comentarios")
+const products = require("../database/models")
+const comentarios = require("../database/models")
 
 const productController = { 
     index: function(req,res){
