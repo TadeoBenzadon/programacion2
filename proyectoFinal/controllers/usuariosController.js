@@ -1,4 +1,4 @@
-const usuarios = require("../database/models")
+const usuarios = require("../db/usuarios")
 
 const usuariosController = { 
     login: function(req,res){

@@ -1,12 +1,13 @@
 module.exports = {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "database_development",
+    "password": "root",
+    "database": "janis_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "port":8889
   },
-  "test": {
+  /*"test": {
     "username": "root",
     "password": null,
     "database": "database_test",
@@ -20,4 +21,6 @@ module.exports = {
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
+    */
+  
 }

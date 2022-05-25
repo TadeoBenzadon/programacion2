@@ -1,4 +1,4 @@
-const products = require("../database/models");
+const products = require("../db/products");
 
 const indexController = { 
     index: function(req,res){
