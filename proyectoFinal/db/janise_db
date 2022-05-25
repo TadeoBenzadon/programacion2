@@ -61,3 +61,22 @@ VALUES
 
 ------------------------------------------------
 
+CREATE TABLE comments(
+id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+product_id INT UNSIGNED ,
+user_id INT UNSIGNED ,
+texto_comentario VARCHAR(400) ,
+created_at DATE,
+updated_at DATE,
+
+FOREIGN KEY (user_id) REFERENCES users(id),
+FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+);
+
+INSERT INTO comments
+VALUES
+(DEFAULT, 1, 2, "Muy recomendado", DEFAULT, DEFAULT ),
+(DEFAULT, 4, 4, "Muy buen elctrodomestico, ademas es de bajo consumo", DEFAULT, DEFAULT),
+(DEFAULT, 3, 3 ,"Yo lo use varios años y es duradedro, un electrodomestico que no te abandona", DEFAULT, DEFAULT ),
+(DEFAULT, 7, 6, "No lo recomiendo, se me rompio a la semana ", DEFAULT, DEFAULT),
+(DEFAULT, 1, 5, "Muy buen producto, muy recomendable como primera compra", DEFAULT, DEFAULT);
