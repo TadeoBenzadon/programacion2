@@ -3,14 +3,14 @@ use janis_db;
 
 CREATE TABLE users (
 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-name VARCHAR(100) ,
-lastname VARCHAR(100) ,
+name VARCHAR(200) ,
+lastname VARCHAR(200) ,
 document INT ,
-username VARCHAR(100) ,
+username VARCHAR(200) ,
 birthday DATE ,
-email VARCHAR(150) ,
-password VARCHAR (255) ,
-img VARCHAR(255) ,
+email VARCHAR(350) ,
+password VARCHAR (385) ,
+img VARCHAR(435) ,
 created_at DATE,
 updated_at DATE
 );
@@ -18,12 +18,46 @@ updated_at DATE
 
 INSERT INTO users 
 VALUES
-(DEFAULT, "Rosario", "Gutiérrez", "39840222", "RoGutiérrez", "1994-04-12", "rosariogut@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "rosario.jpg", DEFAULT, DEFAULT),
-(DEFAULT, "Juan Pablo", "Lopez", "42351192", "JPLopez", "2001-05-06", "jplopez@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "juanpablo.jpg", DEFAULT, DEFAULT),
-(DEFAULT, "Roxana", "Dismar", "26994599", "Roxanita123", "1980-07-10", "roxanadismar@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "roxana.jpg", DEFAULT, DEFAULT),
-(DEFAULT, "Héctor", "Aguirre", "6439944", "Hector123", "1952-08-03", "hectoraguirre@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "hector.jpg", DEFAULT, DEFAULT),
-(DEFAULT, "Nicolas", "Ruiz", "43992413" , "NicoRiver_PL" , "12-03-02", "nicolasruiz@gmail.com.ar", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u","nicolas.jpg", DEFAULT, DEFAULT ),
-(DEFAULT, "Valeria", "Presas", "24202693", "valeritapresas", "1983-10-10", "valeriapresas@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u","valeria.jpg", DEFAULT, DEFAULT),
-(DEFAULT, "admin", "admin", "43992412", "admin", "2002-05-03", "admin@gmail.com", "$2a$10$XAyVJO8j5Gac0KtWun6zXOcvh8/7GFj8rFJGYrGR2DCfLFk8GFeb.","userImage-1623073213136.jpg", DEFAULT, DEFAULT);
+(DEFAULT, "Juana", "Lopez", "40654234", "JuPerez", "1974-03-2", "   Juperez23@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "juana.jpg", DEFAULT, DEFAULT),
+(DEFAULT, "Pedro", "Perez", "39054321", "PePerez", "1991-02-09", "Perezpepe@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "pedro.jpg", DEFAULT, DEFAULT),
+(DEFAULT, "Martina", "Creed", "29467312", "MaCreed", "1964-05-20", "Creed89@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "martina.jpg", DEFAULT, DEFAULT),
+(DEFAULT, "Julian", "Gomez", "37023792", "JGomez", "1982-10-12", "Julian234g@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "julian.jpg", DEFAULT, DEFAULT),
+(DEFAULT, "Patricio", "Alvarez", "31627846" , "PatAlvarez" , "1976-04-12", "Patricio32@gmail.com.ar", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u","patricio.jpg", DEFAULT, DEFAULT ),
+(DEFAULT, "Vicente", "Ruggeri", "43653290", "VicenteRu", "1945-11-19", "Vicente-manzana@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u","vicente.jpg", DEFAULT, DEFAULT),
+(DEFAULT, "Julia", "Martinez", "17426782", "Juliatinez", "2001-12-13", "Martinez-milanesa@gmail.com", "$2a$10$XAyVJO8j5Gac0KtWun6zXOcvh8/7GFj8rFJGYrGR2DCfLFk8GFeb.","julia.jpg", DEFAULT, DEFAULT);
 
+
+-------------------------------------------------------------------------
+
+CREATE TABLE products (
+id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+user_id INT UNSIGNED ,
+electro_name VARCHAR(200) ,
+electro_type VARCHAR (200) ,
+electro_description TEXT ,
+electro_variety VARCHAR(200),
+electro_year SMALLINT ,
+electro_image VARCHAR(435) ,
+electro_comments INT,
+created_at DATE,
+updated_at DATE,
+
+FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+INSERT INTO products
+VALUES
+(DEFAULT, 1, "Marca de Heladea", "Tipo de HelaDERA", "DESCRIPCION", "Heladera", 2021, "heladera.jpg",2, DEFAULT, DEFAULT),
+(DEFAULT, 2, "Marca de Horno ", "tIPO DE Horno","DESCRIPCION", "Horno", 2011, "horno.jpg",0, DEFAULT, DEFAULT),
+(DEFAULT, 3, "Marca de Pava electrica", "Tipo de pava Electrica","DESCRIPCION", "Pava electrica", 2019, "pavaelectrica.jpg",1, DEFAULT, DEFAULT),
+(DEFAULT, 3, "Marca de Cafetera", "Tipo de Cafetera", "dESCRIPCION", "Cafetera", 2020, "cafetera.jpg",1, DEFAULT, DEFAULT),
+(DEFAULT, 3, "Marca de Microondas", "Tipo de microondas", "dESCRIPCION", "Microodnas", 2018, "microondas.jpg",1, DEFAULT, DEFAULT),
+(DEFAULT, 3, "Marca de Aspiradora", "Tipo de Aspiradora", "dESCRIPCION", "Aspiradora", 2010, "Aspiradora.jpg",1, DEFAULT, DEFAULT),
+(DEFAULT, 3, "Marca de Batidora", "Tipo de Batidora", "dESCRIPCION", "Batidora", 2017, "Batidora.jpg",1, DEFAULT, DEFAULT),
+(DEFAULT, 3, "Marca de Plancha", "Tipo de plancha", "dESCRIPCION", "PLancha", 2019, "Plancha.jpg",1, DEFAULT, DEFAULT),
+(DEFAULT, 3, "Marca de Balanza", "Tipo de balanza", "dESCRIPCION", "Balanza", 2022, "Balanza.jpg",1, DEFAULT, DEFAULT),
+(DEFAULT, 3, "Marca de Tostadora", "Tipo de Tostadora", "dESCRIPCION", "Tostadora", 2020, "tostadora.jpg",1, DEFAULT, DEFAULT);
+
+
+------------------------------------------------
 
