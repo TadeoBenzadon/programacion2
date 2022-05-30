@@ -79,4 +79,10 @@ VALUES
 (DEFAULT, 4, 4, "Muy buen elctrodomestico, ademas es de bajo consumo", DEFAULT, DEFAULT),
 (DEFAULT, 3, 3 ,"Yo lo use varios años y es duradedro, un electrodomestico que no te abandona", DEFAULT, DEFAULT ),
 (DEFAULT, 7, 6, "No lo recomiendo, se me rompio a la semana ", DEFAULT, DEFAULT),
-(DEFAULT, 1, 5, "Muy buen producto, muy recomendable como primera compra", DEFAULT, DEFAULT);
+(DEFAULT, 1, 5, "Muy buen producto, muy recomendable como primera compra", DEFAULT, DEFAULT),
+(DEFAULT, 10, 7, "Buen producto, poco recomendable", DEFAULT, DEFAULT),
+(DEFAULT, 2, 1, "Mal producto", DEFAULT, DEFAULT),
+(DEFAULT, 5, 7, "Excelente producto", DEFAULT, DEFAULT),
+(DEFAULT, 6, 4, "Pesimo Producto", DEFAULT, DEFAULT),
+(DEFAULT, 8, 3, "Buen producto", DEFAULT, DEFAULT),
+(DEFAULT, 9, 6, "Muy recomendable", DEFAULT, DEFAULT);
