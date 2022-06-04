@@ -16,7 +16,7 @@
 			</div>
 			<!-- Show the "ultimos" products -->
 			<div>
-				<form class= "formAngie" action="/usuarios" method="GET">
+				<form class= "formAngie" action="/usuarios" method="POST" enctype= 'multipart/form-data'>
 					<div>
 						<label for="email">Email:</label>
 				<input id="email" type="text" name="email" value="">
@@ -27,8 +27,12 @@
 				</div>
 				<div>
 					<label for="contraseña">Contraseña:</label>
-			<input id="contraseña" type="contraseña" name="contraseña" value="">
+			<input id="contraseña" type="password" name="contraseña" value="">
 			</div>
+			<div>
+				<label for="contraseña2">Vuelva a escribir la contraseña :</label>
+		<input id="contraseña2" type="password" name="contraseña2" value="">
+		</div>
 			<div>
 				<label for="fechaDeNacimiento">Fecha de nacimiento:</label>
 		<input id="fecha" type="text" name="fecha" value="">
@@ -39,7 +43,7 @@
 	</div>
 	<div>
 		<label for="email">Foto de perfil:</label>
-<input id="contraseña" type="contraseña" name="contraseña" value="">
+<input type="file" name="avatar" value="">
 </div>
 				
 				<div>
