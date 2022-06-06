@@ -15,7 +15,7 @@ const usuariosController = {
     store: function(req,res){
         let errors = {}
         if(req.body.email == ""){
-            errors.message = "El email es obligatorio" 
+            res.locals.message = "El email es obligatorio" 
             console.log(errors)//guardar en locals
             return res.render('register')
         }
