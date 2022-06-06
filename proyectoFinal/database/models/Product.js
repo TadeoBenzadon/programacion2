@@ -23,7 +23,7 @@ let cols= {
         allowNull: false},
     
     product_fechaDeCarga:{
-        type: dataTypes.STRING,
+        type: dataTypes.DATE,
         allowNull: false},  
     
 }
@@ -32,3 +32,4 @@ let config={
     table_name: "products",
     timesTamps: false
 }
+
