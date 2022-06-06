@@ -15,7 +15,7 @@ let cols= {
         type: dataTypes.STRING,
         allowNull: false},
         category:{
-            type:dataTypes:STRING
+            type:dataTypes.STRING
         },
     
     product_descripcion:{
