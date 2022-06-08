@@ -13,35 +13,41 @@
 		<div class="row">
 			<div class="col-12">
 				<h2 class="products-title">Editar mi perfil</h2>
-			</div>
-			<form class= "formAngie" action="/usuarios" method="GET">
 				<div>
-					<label for="email">Email:</label>
-			<input id="email" type="text" name="email" value="">
+					<form class= "formAngie" action="/" method="POST" enctype= 'multipart/form-data'>
+						<div>
+							<label for="email">Email:</label>
+					<input id="email" type="text" name="email" value="<%user.email%>">
+					<p><%= res.locals.message %> </p>
+					</div>
+						<div>
+							<label for="usuario">Usuario:</label>
+					<input id="usuario" type="text" name="usuario" value="<%user.name%>">
+					</div>
+					<div>
+						<label for="contraseña">Contraseña:</label>
+				<input id="contraseña" type="password" name="contraseña" value="">
+				</div>
+				<div>
+					<label for="contraseña2">Vuelva a escribir la contraseña :</label>
+			<input id="contraseña2" type="password" name="contraseña2" value="">
 			</div>
 				<div>
-					<label for="usuario">Usuario:</label>
-			<input id="usuario" type="text" name="usuario" value="">
+					<label for="fechaDeNacimiento">Fecha de nacimiento:</label>
+			<input id="fecha" type="text" name="fecha" value="">
 			</div>
 			<div>
-				<label for="contraseña">Contraseña:</label>
-		<input id="contraseña" type="contraseña" name="contraseña" value="">
+				<label for="email">DNI:</label>
+		<input id="dni" type="number" name="dni" value="<%user.dni%>">
 		</div>
 		<div>
-			<label for="fechaDeNacimiento">Fecha de nacimiento:</label>
-	<input id="fecha" type="text" name="fecha" value="">
+			<label for="email">Foto de perfil:</label>
+	<input type="file" name="avatar" value="">
 	</div>
-	<div>
-		<label for="email">DNI:</label>
-<input id="dni" type="number" name="dni" value="">
-</div>
-<div>
-	<label for="email">Foto de perfil:</label>
-<input id="contraseña" type="contraseña" name="contraseña" value="">
-</div>
+					
 			
 			<div>
-					<button type="submit">Enviar</button> 
+					<button type="submit">Actualizar datos</button> 
 			</div>
 			</form>
 

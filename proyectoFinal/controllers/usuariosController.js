@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const db = require("../database/models/User"); 
+const db = require("../database/models/"); 
 //const op = db.Sequelize.Op;
 const users = db.User; 
 
@@ -75,12 +75,37 @@ const usuariosController = {
         })
     }, 
     profileEdit: function(req,res){
-        return res.render('profileEdit', {
-            nombre: usuarios.lista[0].usuario,
-            mail: usuarios.lista[0].email,
-            fotoPerfil: usuarios.lista[0].fotoDePerfil
-        })
+        let userId = req.params.userId;
+        users.findByPk(userId)
+            .then(function(user){
+                return res.render('profileEdit', {profileEdit: user})
+            })
+        
     }, 
+    profileUpdate: function(req,res){
+        let user = {
+           email: req.body.email, 
+           usuario: req.bbody.user, 
+           password: bcrypt.hashSync (req.body.password, 10), 
+        }
+        if(req.file == undefined){
+            user.avatar = req.session.userAvatar
+        } else{
+            user.avatar = req.file.filename
+        }
+
+        users.update(user, {
+            where: {
+                id: req.session.userId
+            }
+        })
+        .then(function(userId){
+            user.id = req.session.userId
+            return res.redirect('/')
+        })
+
+    }
 }
+
 
 module.exports = usuariosController; 

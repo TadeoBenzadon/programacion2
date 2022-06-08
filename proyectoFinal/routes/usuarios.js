@@ -20,6 +20,7 @@ router.get('/', usuariosController.login);
 router.get('/register', usuariosController.register); 
 router.post('/register', upload.single('avatar'), usuariosController.store); 
 router.get('/profile', usuariosController.profile); 
-router.get('/profile/edit', usuariosController.profileEdit); 
+router.get('/profile/edit/:userId', usuariosController.profileEdit); 
+router.post('/profile/edit', upload.single('avatar'), usuariosController.profileUpdate); 
 
 module.exports = router;
