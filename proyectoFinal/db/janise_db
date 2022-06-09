@@ -15,13 +15,13 @@ updated_at DATE
 
 INSERT INTO users 
 VALUES
-(DEFAULT, "Juana", "Lopez", "40654234", "JuPerez", "1974-03-2", "   Juperez23@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "juana.jpg", DEFAULT, DEFAULT),
-(DEFAULT, "Pedro", "Perez", "39054321", "PePerez", "1991-02-09", "Perezpepe@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "pedro.jpg", DEFAULT, DEFAULT),
-(DEFAULT, "Martina", "Creed", "29467312", "MaCreed", "1964-05-20", "Creed89@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "martina.jpg", DEFAULT, DEFAULT),
-(DEFAULT, "Julian", "Gomez", "37023792", "JGomez", "1982-10-12", "Julian234g@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "julian.jpg", DEFAULT, DEFAULT),
-(DEFAULT, "Patricio", "Alvarez", "31627846" , "PatAlvarez" , "1976-04-12", "Patricio32@gmail.com.ar", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u","patricio.jpg", DEFAULT, DEFAULT ),
-(DEFAULT, "Vicente", "Ruggeri", "43653290", "VicenteRu", "1945-11-19", "Vicente-manzana@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u","vicente.jpg", DEFAULT, DEFAULT),
-(DEFAULT, "Julia", "Martinez", "17426782", "Juliatinez", "2001-12-13", "Martinez-milanesa@gmail.com", "$2a$10$XAyVJO8j5Gac0KtWun6zXOcvh8/7GFj8rFJGYrGR2DCfLFk8GFeb.","julia.jpg", DEFAULT, DEFAULT);
+(DEFAULT, "JuPerez", "1974-03-2", "   Juperez23@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "juana.jpg", DEFAULT, DEFAULT),
+(DEFAULT, "PePerez", "1991-02-09", "Perezpepe@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "pedro.jpg", DEFAULT, DEFAULT),
+(DEFAULT, "MaCreed", "1964-05-20", "Creed89@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "martina.jpg", DEFAULT, DEFAULT),
+(DEFAULT, "JGomez", "1982-10-12", "Julian234g@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "julian.jpg", DEFAULT, DEFAULT),
+(DEFAULT, "PatAlvarez" , "1976-04-12", "Patricio32@gmail.com.ar", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u","patricio.jpg", DEFAULT, DEFAULT ),
+(DEFAULT, "VicenteRu", "1945-11-19", "Vicente-manzana@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u","vicente.jpg", DEFAULT, DEFAULT),
+(DEFAULT, "Juliatinez", "2001-12-13", "Martinez-milanesa@gmail.com", "$2a$10$XAyVJO8j5Gac0KtWun6zXOcvh8/7GFj8rFJGYrGR2DCfLFk8GFeb.","julia.jpg", DEFAULT, DEFAULT);
 
 
 -------------------------------------------------------------------------
