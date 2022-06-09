@@ -10,15 +10,6 @@ module.exports = function(sequelize, dataTypes){
             primaryKey: true,
             type: dataTypes.INTEGER,
         },
-        name:{
-            type: dataTypes.STRING,
-        },
-        lastname:{
-            type: dataTypes.STRING,
-        },
-        document:{
-            type: dataTypes.INTEGER,
-        },
         username:{
             type: dataTypes.STRING,
         },
