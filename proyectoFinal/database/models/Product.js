@@ -13,12 +13,6 @@ module.exports = function (sequelize, dataTypes) {
         electro_description: {
             type: dataTypes.TEXT,
         },
-        electro_variety: {
-            type: dataTypes.STRING,
-        },
-        electro_year: {
-            type: dataTypes.SMALLINT,
-        },
         electro_image: {
             type: dataTypes.STRING,
         },
