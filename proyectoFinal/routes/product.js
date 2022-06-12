@@ -7,11 +7,14 @@ router.get('/', productController.index);
 router.get('/add', productController.add); 
 router.get('/search', productController.search); */
 router.get('/detail/:id', productController.show);
-router.get('/new', productController.new);
+router.get('/edit', productController.edit);
 router.get('/search', productController.search); 
-router.get('/recomended', productController.recomended); 
 router.get('/create', productController.create); 
 router.post('/store', productController.store); 
+router.get('/createComment', productController.createComment); 
+router.get('/destroy', productController.destroy); 
+router.post('/destroyComment', productController.destroyComment); 
+
 
 
 module.exports = router;
