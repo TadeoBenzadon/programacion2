@@ -26,7 +26,7 @@ module.exports = function (sequelize, dataTypes) {
             type: dataTypes.DATE,
         },
         user_id: {
-            type: dataTypes.INTEGRE,
+            type: dataTypes.INTEGRER,
         },
     }
 
@@ -46,6 +46,10 @@ module.exports = function (sequelize, dataTypes) {
              foreignKey: 'product_id',
              otherKey: 'comment_id',
              timestamps: false
+        }), 
+        Product.belongsTo(model.User, {
+            as: 'products', 
+            foreignKey: 'user_id'
         })
     } 
     

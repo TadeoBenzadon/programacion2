@@ -10,7 +10,7 @@ module.exports = function(sequelize, dataTypes){
             primaryKey: true,
             type: dataTypes.INTEGER,
         },
-        user:{
+        userName:{
             type: dataTypes.STRING,
         },
         birthday:{
@@ -41,6 +41,16 @@ module.exports = function(sequelize, dataTypes){
 
    const User = sequelize.define(alias, cols, config);
 
+   User.associate = function(model){
+    User.hasMany(model.Product, {
+        as: 'products', 
+        foreignKey: 'user_id'
+    }), 
+    User.hasMany(model.Comment, {
+        as: 'comentarios', 
+        foreignKey: 'user_id'
+    })
+   } 
 
    return User;
 }

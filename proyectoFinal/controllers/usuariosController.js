@@ -1,22 +1,24 @@
 const bcrypt = require('bcryptjs');
-const db = require("../database/models/"); 
+const db = require("../database/models"); 
 //const op = db.Sequelize.Op;
 const users = db.User; 
+const products = db.Product; 
+
 
 const usuariosController = { 
     login: function(req,res){
-        user.findOne({
+        users.findOne({
             where: {email: req.body.email}
         })
         .then(function(user){
-            req.session.user = user
+            req.session.users = userName
             res.cookie('userId', user.id, {maxAge: 1000*60*5})
             return res.redirect('/')
         })
         .catch(error => console.log(error))        
     }, 
     register: function(req,res){
-        if(req.session.user !== undefined){
+        if(req.session.users !== undefined){
             return res.redirect('/')} // aca tendria que hacer que ya no haya registro, que haya logout
             else{
             return res.render('register');
@@ -29,7 +31,7 @@ const usuariosController = {
             return res.render('register')
         }
         if(req.body.user == ""){
-            res.locals.user = "El nombre de usuario es obligatorio" 
+            res.locals.message = "El nombre de usuario es obligatorio" 
             return res.render('register')
         }
         else if(req.body.password == ""){
@@ -59,11 +61,14 @@ const usuariosController = {
                 }
                 else{
                     let user = {
-                        user: req.body.user,
+                        userName: req.body.user,
                         email: req.body.email,
                         password: bcrypt.hashSync (req.body.password, 10),
                         avatar: req.file.filename
                     }
+            .catch(e=>{
+                console.log(e)
+            })   
                     users.create(user)
                     .then(user => {
                         return res.redirect('/')
@@ -76,11 +81,25 @@ const usuariosController = {
         }
     }, 
     profile: function(req,res){
-        return res.render('profile', { 
-            user: usuarios.lista[0].usuario,
-            mail: usuarios.lista[0].email,
-            fotoPerfil: usuarios.lista[0].fotoDePerfil
+        let id = req.session.users.id
+        users.findByPk(id , {
+        where:[{
+            association: 'products'
+        }]
         })
+        .then(products => {
+            res.render('profile', {
+            user: users.userName,
+            email: users.email,
+            avatar: users.avatar, 
+            products: products
+            })
+        })
+        .catch(e=>{
+            console.log(e)
+        })
+            
+    
     }, 
     profileEdit: function(req,res){
         let userId = req.params.userId;
@@ -88,28 +107,34 @@ const usuariosController = {
             .then(function(user){
                 return res.render('profileEdit', {profileEdit: user})
             })
+            .catch(e=>{
+                console.log(e)
+            })
         
     }, 
     profileUpdate: function(req,res){
         let user = {
            email: req.body.email, 
-           user: req.body.user, 
+           userName: req.body.user, 
            password: bcrypt.hashSync (req.body.password, 10), 
         }
         if(req.file == undefined){
-            user.avatar = req.session.userAvatar
+            userAvatar = req.session.users.avatar
         } else{
-            user.avatar = req.file.filename
+            userAvatar = req.file.filename
         }
 
         users.update(user, {
             where: {
-                id: req.session.userId
+                id: req.session.users.id
             }
         })
         .then(function(userId){
-            user.id = req.session.userId
+            userId = req.session.users.id
             return res.redirect('/')
+        })
+        .catch(e=>{
+            console.log(e)
         })
 
     }

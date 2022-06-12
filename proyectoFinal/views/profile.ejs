@@ -15,15 +15,15 @@
 			<div class="data-container col-6">
 				<div class="d-flex align-items-center ">
 					<h1 class="main-title"> <%= nombre%>
-						<p><a href='/usuarios/profile/edit/<%user.id%>'>Editar Perfil
+						<p><a href='/usuarios/profile/edit/<%=user.id%>'>Editar Perfil
 							<i class="fas fa-cog"></i>
 						</a></p>
 					</h1>
 					
 				</div>
 				<div class="d-flex align-items-center ">
-					<h1 class="main-title"> <%= nombre%>
-						<p><a href='/products/edit/<%product.id%>'>Editar Productos
+					<h1 class="main-title"> <%=nombre%>
+						<p><a href='/products/edit/<%=products.id%>'>Editar Productos
 							<i class="fas fa-cog"></i>
 						</a></p>
 					</h1>
@@ -38,6 +38,29 @@
 				</div>
 			</div>
 		</div>
+		<div class="container products-wrapper">
+			<div class="row">
+				<div class="col-12">
+					<h2 class="products-title">Mis productos</h2>
+				</div>
+				<!-- Show mis productos -->
+				<div class="col-12 col-sm-6 col-lg-3">
+					<% for(let i=0; i<products.length; i++){%>
+						<section class="product-box">
+							<a href="/detail/:<%=products[i].id%>">
+								<figure class="product-box_image">
+									<img src="<%= products[i].electro_image%>" alt="">
+								</figure>
+								<article class="product-box_data">
+									<h2> <%= products[i].electro_name%> </h2>
+									<p><%= products[i].electro_description%></p>
+									<p>Comentarios: </p>
+								</article>
+							</a>
+						</section>
+						<%}%>
+					
+				</div>
 	</section>
 	<!-- /Datos del usuario -->
 

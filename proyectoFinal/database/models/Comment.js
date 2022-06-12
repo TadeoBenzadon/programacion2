@@ -39,7 +39,11 @@ let cols= {
              foreignKey: 'comment_id',
              otherKey: 'product_id',
              timestamps: false
-        })
+        }), 
+    Comment.belongsTo(models.User, {
+        as: 'comentarios', 
+        foreignKey: 'user_id'
+    })
     } 
     
     return Comment;
