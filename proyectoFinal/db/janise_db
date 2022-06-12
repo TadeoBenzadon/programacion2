@@ -3,11 +3,11 @@ use janis_db;
 
 CREATE TABLE users (
 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-username VARCHAR(200) ,
+user VARCHAR(200) ,
 birthday DATE ,
 email VARCHAR(350) ,
 password VARCHAR (385) ,
-img VARCHAR(435) ,
+avatar VARCHAR(435) ,
 created_at DATE,
 updated_at DATE
 );

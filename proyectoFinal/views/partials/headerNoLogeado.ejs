@@ -45,13 +45,19 @@
                             </button>
                         </form>
                     </li> -->
-                <li>
-                    <a href="/usuarios/register">Creá tu cuenta <i class="far fa-address-card"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/usuarios">Ingresá <i class="fas fa-sign-in-alt"></i></a>
-                </li>
+                    <%if(locals.user !== undefined){%>
+                        <p>Hola <%= user.user%></p>
+                        <li><a href=”/usuarios/logout”> Logout</a></li>
+                        <li><a href=”/usuarios/logout”> Mi Perfil</a></li>
+                        <li><a href=”/usuarios/logout”> Agregar Producto</a></li>
+                        <% } else {%>
+                        <p>No te olvides de loguearte o registrarte</p>
+                        <li><a href=”/usuarios/register”>Registrate</a></li>
+                        <li><a href=”/usuarios/login”>Inicia Sesión</a></li>
+                        <%}%>
+                        
+                            
+                        
             </ul>
         </nav>
     </div>

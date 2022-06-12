@@ -10,7 +10,7 @@ module.exports = function(sequelize, dataTypes){
             primaryKey: true,
             type: dataTypes.INTEGER,
         },
-        username:{
+        user:{
             type: dataTypes.STRING,
         },
         birthday:{
@@ -22,7 +22,7 @@ module.exports = function(sequelize, dataTypes){
         password: {
             type: dataTypes.STRING,
         },
-        img: {
+        avatar: {
             type: dataTypes.STRING,
         },
         created_at:{
