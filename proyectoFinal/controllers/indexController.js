@@ -8,7 +8,7 @@ const indexController = {
                association: 'users'},
                {association: 'comments'}
            ],
-           order: [['createdAt', 'DESC']]
+           order: [['created_at', 'DESC']]
         })
         .then(function(productos)
            {return res.render('index',{
