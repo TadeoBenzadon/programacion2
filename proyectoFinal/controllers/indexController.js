@@ -6,11 +6,12 @@ const indexController = {
        db.Product.findAll({
            order: [['electro_year', 'ASC']],
            limit: 12, 
-           include: [
+/*            include: [
                {association: 'user'},
                {association: 'comment',
                 include:{association: 'user'}}
-           ]})
+           ] */
+        })
 
            .then(function(productos)
            {return res.render('index',{

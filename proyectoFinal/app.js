@@ -6,17 +6,17 @@ var logger = require('morgan');
 var db = require('./database/models'); 
 const users = db.User; 
 
-app.use(session({
+/* app.use(session({
 	secret: 'userDb', 
 	resave: false,
 	saveUninitialized: true
-}))
-app.use(function(res, req, next){
+})) */
+/* app.use(function(res, req, next){
 res.locals.user = req.session.user
 return next()
-})
+}) */
 
-app.use(function(res, req, next){
+/* app.use(function(res, req, next){
 if(req.session.user == undefined && req.cookies.userId !== undefined){
 	let idDeLaCookie = req.cookies.userId; 
 db.User.findByPk(idDeLaCookie)
@@ -28,7 +28,7 @@ db.User.findByPk(idDeLaCookie)
 .catch(error => console.log(error))
 }
 return next()
-})
+}) */
 
 
 var indexRouter = require('./routes/index');
@@ -49,11 +49,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
+/* app.use(session({
   secret:'productDb',
   resave:false,
   saveUnitialized: true
-}))
+})) */
 
 app.use('/', indexRouter);
 app.use('/product', productRouter);

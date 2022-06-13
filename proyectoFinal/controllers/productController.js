@@ -148,7 +148,7 @@ const productController ={
     },
     create: function(req, res){
         if (req.session.user != undefined){
-            return res.render ('product-add',{
+            return res.render ('productAdd',{
                 title: 'Agregar | Janise Market',
             });}else{
                 res.redirect ('/')
@@ -176,7 +176,7 @@ const productController ={
     },
 
 
-    createComment: function (req, res){
+   /* createComment: function (req, res){
         let data = req.body;
         let errors = {}
            
@@ -238,7 +238,7 @@ const productController ={
         .catch (error => {
             console.log(error);
         })
-    }
+    }*/
 }
 
 module.exports = productController

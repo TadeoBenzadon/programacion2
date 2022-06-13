@@ -16,18 +16,18 @@ module.exports = function (sequelize, dataTypes) {
         electro_image: {
             type: dataTypes.STRING,
         },
-        electro_comments: {
+        /*electro_comments: {
             type: dataTypes.INTEGRE,
-        },
+        },*/
         created_at: {
             type: dataTypes.DATE,
         },
         updated_at: {
             type: dataTypes.DATE,
         },
-        user_id: {
+        /*user_id: {
             type: dataTypes.INTEGRER,
-        },
+        },*/
     }
 
     let config = {
@@ -36,9 +36,9 @@ module.exports = function (sequelize, dataTypes) {
         underscored: true,
     }
 
-    const User = sequelize.define(alias, cols, config);
+    const Product = sequelize.define(alias, cols, config);
 
-    Product.associate = function(models){
+    /*Product.associate = function(models){
        
         Product.belongsToMany(models.Comement, {
              as: 'comments',
@@ -51,7 +51,7 @@ module.exports = function (sequelize, dataTypes) {
             as: 'products', 
             foreignKey: 'user_id'
         })
-    } 
+    } */
     
     
     return Product;
