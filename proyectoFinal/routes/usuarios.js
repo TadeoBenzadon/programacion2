@@ -1,3 +1,4 @@
+const { Router } = require('express');
 var express = require('express');
 var router = express.Router();
 let multer = require('multer');
@@ -17,6 +18,7 @@ let upload = multer({storage: storage})
 
 /* GET home page. */
 router.get('/', usuariosController.login); 
+router.post('/', usuariosController.signIn);
 router.get('/register', usuariosController.register); 
 router.post('/register', upload.single('avatar'), usuariosController.store); 
 router.get('/profile', usuariosController.profile); 

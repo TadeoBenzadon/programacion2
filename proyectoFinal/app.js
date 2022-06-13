@@ -5,8 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require('./database/models'); 
 let session = require('express-session');
-var app = express();
-
+const Usuario = db.User; 
 
 
 
@@ -14,7 +13,7 @@ var indexRouter = require('./routes/index');
 var productRouter = require('./routes/product');
 var usuariosRouter = require('./routes/usuarios');
 
-
+var app = express();
 
 
 // view engine setup
@@ -27,35 +26,40 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* app.use(session({
-  secret: 'userDb', 
+app.use(session({
+  secret: 'moviesDb',
   resave: false,
   saveUninitialized: true
 }))
 
-
-
-  app.use(function(res, req, next){
-    if(req.session.user !== undefined){
-      res.locals = req.session.user
-    }
+//Pasar datos de session a locals
+app.use(function(req, res, next){
+  res.locals.user = req.session.user
   return next()
-  })
+})
 
-app.use(function(res, req, next){
-if(req.session.user == undefined && req.cookies.userId !== undefined){
-	let idDeLaCookie = req.cookies.userId; 
-db.User.findByPk(idDeLaCookie)
-.then(function(user){
-	req.session.user = user
-	res.locals.user = user	
-	return next()
+app.use(function(req, res, next){
+  //chequear que no tengamos usuario en sessión y si tengamos cookie
+  if(req.session.user == undefined && req.cookies.userId !== undefined){
+    //Buscar el usario de la base de datos
+       Usuario.findByPk(req.cookies.userId)
+            .then( function(user){
+              //Dentro del then pasar al usario a req.session.user
+              //Pasar al usuario locals.user
+              // retornar next()
+                req.session.user = user
+                res.locals.user = user
+              
+                return next()
+
+            })
+            .catch( error => console.log(error))
+          } else { //tiene que haber un else
+            return next()
+          }
 })
-.catch(error => console.log(error))
-}
-return next()
-})
- */
+
+  
 
 app.use('/', indexRouter);
 app.use('/product', productRouter);

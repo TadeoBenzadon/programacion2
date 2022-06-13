@@ -5,21 +5,33 @@ const Usuario = db.User;
 
 
 const usuariosController = { 
-    login: function(req,res){
+    login: function(req, res){
+        return res.render('login');
+    },
+    signIn: function(req,res){
         // let errors = {};
-        user.findOne({
-            where: {email: req.body.email}
+        Usuario.findOne({
+            where: { email: req.body.email}
         })
-        .then(function(user){
-            req.session.user = userName
-            res.cookie('userId', user.id, {maxAge: 1000*60*5})
-            return res.redirect('/')
-        })
-        .catch(error => console.log(error))        
+            .then(function(user){
+                //return res.send(user)
+                req.session.user = user
+
+                //preguntar si el usuario tildó el checkbox 'recordarme''
+                res.cookie('userId', user.id, {maxAge: 1000*60*5})
+                return res.redirect('/')
+
+            })
+            .catch( error => console.log(error))        
     }, 
     register: function(req,res){
-        return res.render('register');    
-    }, 
+        if(req.session.user !== undefined){
+            return res.redirect('/');   
+        } 
+        else{
+            return res.render('register');
+        }
+    },
     store: (req, res) =>{
         let errors = {};
         if(req.body.user == ""){
@@ -65,7 +77,7 @@ const usuariosController = {
                     Usuario.create(usuario)
                         .then(user => {
                             return res.redirect('/usuarios')
-                            console.log(user)
+                            //console.log(user)
                         })
                         .catch( err => console.log(err))
                 }
@@ -74,17 +86,18 @@ const usuariosController = {
         }
     },
     profile: function(req,res){
-        let id = req.session.users.id
-        user.findByPk(id , {
+        let id = req.session.user.id
+        Usuario.findByPk(id , {
         where:[{
             association: 'products'
         }]
         })
         .then(products => {
             res.render('profile', {
-            user: users.userName,
-            email: users.email,
-            avatar: users.avatar, 
+            user: Usuario.user,
+            userId: Usuario.id,
+            email: Usuario.email,
+            avatar: Usuario.avatar, 
             products: products
             })
         })
@@ -96,7 +109,7 @@ const usuariosController = {
     }, 
     profileEdit: function(req,res){
         let userId = req.params.userId;
-        users.findByPk(userId)
+        Usuario.findByPk(userId)
             .then(function(user){
                 return res.render('profileEdit', {profileEdit: user})
             })
@@ -108,22 +121,22 @@ const usuariosController = {
     profileUpdate: function(req,res){
         let user = {
            email: req.body.email, 
-           userName: req.body.user, 
+           user: req.body.user, 
            password: bcrypt.hashSync (req.body.password, 10), 
         }
         if(req.file == undefined){
-            userAvatar = req.session.users.avatar
+            avatar = req.session.users.avatar
         } else{
-            userAvatar = req.file.filename
+            avatar = req.file.filename
         }
 
-        users.update(user, {
+        Usuario.update(user, {
             where: {
                 id: req.session.users.id
             }
         })
         .then(function(userId){
-            userId = req.session.users.id
+            userId = req.session.user.id
             return res.redirect('/')
         })
         .catch(e=>{
