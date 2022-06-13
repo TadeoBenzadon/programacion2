@@ -14,15 +14,15 @@
 			<div class="col-12">
 				<h2 class="products-title">Editar mi perfil</h2>
 				<div>
-					<form class= "formAngie" action="/usuarios/register" method="POST" enctype= 'multipart/form-data'>
+					<form class= "formAngie" action="/usuarios/profile/edit" method="POST" enctype= 'multipart/form-data'>
 						<div>
 							<label for="email">Email:</label>
-					<input id="email" type="text" name="email" value="<%=email%>">
+					<input id="email" type="text" name="email" value="<%=user.email%>">
 					
 					</div>
 						<div>
 							<label for="user">Usuario:</label>
-					<input id="user" type="text" name="user" value="<%=user%>">
+					<input id="user" type="text" name="user" value="<%=user.user%>">
 					
 					</div>
 					<div>

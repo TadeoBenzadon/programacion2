@@ -45,10 +45,10 @@
                             </button>
                         </form>
                     </li> -->
-                    <%if(locals.user){%>
-                        <p>Hola <%= user.user%></p>
+                    <%if(locals.user !== undefined){%> 
+                        <p>Hola <%=user.user%></p>
                         <li><a href='/usuarios/logout'> Logout</a></li>
-                        <li><a href='/usuarios/profile'> Mi Perfil</a></li>
+                        <li><a href='/usuarios/profile/<%=user.id%>'> Mi Perfil</a></li>
                         <li><a href='/product/add'> Agregar Producto</a></li>
                         <% } else {%>
                         <p>No te olvides de loguearte o registrarte</p>

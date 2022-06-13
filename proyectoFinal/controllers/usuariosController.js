@@ -88,60 +88,63 @@ const usuariosController = {
     profile: function(req,res){
         let id = req.session.user.id
         Usuario.findByPk(id , {
-        where:[{
+        include:[{
             association: 'products'
         }]
         })
-        .then(products => {
+        .then(data => {
             res.render('profile', {
+            products: data,
             user: Usuario.user,
             userId: Usuario.id,
             email: Usuario.email,
-            avatar: Usuario.avatar, 
-            products: products
+            avatar: Usuario.avatar 
             })
         })
         .catch(e=>{
             console.log(e)
         })
-            
+       
     
     }, 
-    profileEdit: function(req,res){
+    profileEdit: function(req, res){
         let userId = req.params.userId;
+
+        // Controlar que solo yo puedo cambiar los datos
         Usuario.findByPk(userId)
             .then(function(user){
-                return res.render('profileEdit', {profileEdit: user})
+                return res.render('profileEdit', {user: user})
             })
-            .catch(e=>{
+            .catch( e => {
                 console.log(e)
             })
-        
-    }, 
-    profileUpdate: function(req,res){
+    },
+    profileUpdate: function(req, res){
+        console.log(req.body)
         let user = {
-           email: req.body.email, 
-           user: req.body.user, 
-           password: bcrypt.hashSync (req.body.password, 10), 
+            user: req.body.user,
+            email: req.body.email,
+            password: bcrypt.hashSync(req.body.password, 10),
         }
+
         if(req.file == undefined){
-            avatar = req.session.users.avatar
-        } else{
-            avatar = req.file.filename
+            user.avatar = 'avatar-1654086189266.jpg'
+        } else {
+            user.avatar = req.file.filename;
         }
 
         Usuario.update(user, {
             where: {
-                id: req.session.users.id
+                id: req.session.user.id  // Tiene que ser el usuario de session
             }
         })
-        .then(function(userId){
-            userId = req.session.user.id
-            return res.redirect('/')
-        })
-        .catch(e=>{
-            console.log(e)
-        })
+            .then(function(user){
+                // Manejar la session
+                return res.redirect('/')
+            })
+            .catch( function(err) {
+                console.log(err)
+            })
 
     }
 }
