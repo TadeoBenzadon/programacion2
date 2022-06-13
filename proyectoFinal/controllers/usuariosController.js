@@ -1,75 +1,78 @@
 const bcrypt = require('bcryptjs');
 const db = require("../database/models"); 
 //const op = db.Sequelize.Op;
-const users = db.User; 
+const user = db.User; 
 
 
 const usuariosController = { 
     login: function(req,res){
-        users.findOne({
+        // let errors = {};
+        user.findOne({
             where: {email: req.body.email}
         })
         .then(function(user){
-            req.session.users = userName
+            req.session.user = userName
             res.cookie('userId', user.id, {maxAge: 1000*60*5})
             return res.redirect('/')
         })
         .catch(error => console.log(error))        
     }, 
     register: function(req,res){
-        if(req.session.users !== undefined){
-            return res.redirect('/')} // aca tendria que hacer que ya no haya registro, que haya logout
-            else{
-            return res.render('register');
-            } 
+return res.render('register');
+     
             
     }, 
     store: function(req,res){
+        let errors = {}
         if(req.body.email == ""){
-            res.locals.message = "El email es obligatorio" 
+            errors.message = "El email es obligatorio" ; 
+            res.locals.errors = errors; 
             return res.render('register')
         }
-        if(req.body.user == ""){
-            res.locals.message = "El nombre de usuario es obligatorio" 
+        else if(req.body.user == ""){
+            errors.message = "El nombre de usuario es obligatorio"  ; 
+            res.locals.errors = errors; 
             return res.render('register')
         }
         else if(req.body.password == ""){
-            res.locals.message = "La contraseña es obligatorio" 
+            errors.message = "La contraseña es obligatorio"  ; 
+            res.locals.errors = errors; 
             return res.render('register')
         }
         else if(req.body.password2 == ""){
-            res.locals.message = "Reescribir la contraseña es obligatorio" 
+            errors.message = "Reescribir la contraseña es obligatorio"   ; 
+            res.locals.errors = errors; 
             return res.render('register')
         }
         else if(req.password != req.password2){
-            res.locals.message = "Las contraseñas no coinciden" 
+            errors.message = "Las contraseñas no coinciden"    ; 
+            res.locals.errors = errors; 
             return res.render('register')
         }
         else if(req.file.mimetype !== 'image/png' && req.file.mimetype !=='image/jpg' && req.file.mimetype !=='image/jpeg'){
-            res.locals.message = "El archivo debe ser png, jpg o jpeg"
+            errors.message = "El archivo debe ser png, jpg o jpeg"   ; 
+            res.locals.errors = errors;
             return res.render('register')
         }
         else {
-            users.findOne({
+            user.findOne({
                 where: [{email: req.body.email}]
             })
             .then(function(user){
                 if(user != null){
-                    res.locals.message = "El email ya esta registrado" 
+                    errors.message = "El email ya esta registrado"    ; 
+                    res.locals.errors = errors;
                     return res.render('register')
                 }
                 else{
                     let user = {
-                        userName: req.body.user,
                         email: req.body.email,
+                        user: req.body.user,
                         password: bcrypt.hashSync (req.body.password, 10),
                         avatar: req.file.filename
-                    }
-            .catch(e=>{
-                console.log(e)
-            })   
-                    users.create(user)
-                    .then(user => {
+                    } 
+                    user.create(user)
+                    .then(usuario => {
                         return res.redirect('/')
                     })
                     .catch(e=>{

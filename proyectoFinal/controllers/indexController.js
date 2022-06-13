@@ -4,6 +4,11 @@ const db = require('../database/models')
 const indexController = { 
     index: function(req,res){
        db.Product.findAll({
+           include: [{
+               association: 'users'},
+               {association: 'comments'}
+           ],
+           order: [['createdAt', 'DESC']]
         })
         .then(function(productos)
            {return res.render('index',{
