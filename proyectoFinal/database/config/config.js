@@ -7,7 +7,7 @@ module.exports = {
     "dialect": "mysql",
     "port":8889
   },
-  /*"test": {
+  "test": {
     "username": "root",
     "password": null,
     "database": "database_test",
@@ -21,6 +21,6 @@ module.exports = {
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
-    */
+    
   
 }
