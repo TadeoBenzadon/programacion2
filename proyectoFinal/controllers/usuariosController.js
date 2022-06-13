@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const db = require("../database/models"); 
-//const op = db.Sequelize.Op;
-const user = db.User; 
+const op = db.Sequelize.Op;
+const Usuario = db.User; 
 
 
 const usuariosController = { 
@@ -18,73 +18,64 @@ const usuariosController = {
         .catch(error => console.log(error))        
     }, 
     register: function(req,res){
-return res.render('register');
-     
-            
+        return res.render('register');    
     }, 
-    store: function(req,res){
-        let errors = {}
-        if(req.body.email == ""){
-            errors.message = "El email es obligatorio" ; 
-            res.locals.errors = errors; 
+    store: (req, res) =>{
+        let errors = {};
+        if(req.body.user == ""){
+            errors.register = "Nombre no puede estar vacio"
+            res.locals.errors = errors
             return res.render('register')
-        }
-        else if(req.body.user == ""){
-            errors.message = "El nombre de usuario es obligatorio"  ; 
-            res.locals.errors = errors; 
+        }else if(req.body.email == ""){
+            errors.register = "Email no puede estar vacio"
+            res.locals.errors = errors
             return res.render('register')
-        }
-        else if(req.body.password == ""){
-            errors.message = "La contraseña es obligatorio"  ; 
-            res.locals.errors = errors; 
+        }else if (req.body.password == ""){
+            errors.register = "Contraseña no puede estar vacio"
+            res.locals.errors = errors
             return res.render('register')
-        }
-        else if(req.body.password2 == ""){
-            errors.message = "Reescribir la contraseña es obligatorio"   ; 
-            res.locals.errors = errors; 
+        } else if (req.body.password.length < 4){
+            errors.register = "Contraseña debe tener más de 3 caracteres"
+            res.locals.errors = errors
             return res.render('register')
-        }
-        else if(req.password != req.password2){
-            errors.message = "Las contraseñas no coinciden"    ; 
-            res.locals.errors = errors; 
+        }else if(req.body.password2 == ""){
+            errors.register = "Re escribir contraseña no puede estar vacio"
+            res.locals.errors = errors
             return res.render('register')
-        }
-        else if(req.file.mimetype !== 'image/png' && req.file.mimetype !=='image/jpg' && req.file.mimetype !=='image/jpeg'){
-            errors.message = "El archivo debe ser png, jpg o jpeg"   ; 
-            res.locals.errors = errors;
-            return res.render('register')
-        }
-        else {
-            user.findOne({
-                where: [{email: req.body.email}]
-            })
-            .then(function(user){
-                if(user != null){
-                    errors.message = "El email ya esta registrado"    ; 
-                    res.locals.errors = errors;
+        } else {
+           Usuario.findOne({where: [{ email : req.body.email}]})
+            .then( user => {
+                if(user !=null){
+                    errors.register = "Email ya existe"
+                    res.locals.errors = errors
                     return res.render('register')
-                }
-                else{
-                    let user = {
+                } else if(req.body.password != req.body.password2 ) {
+                    errors.register = "Las contraseñas no coinciden"
+                    res.locals.errors = errors
+                    return res.render('register')
+                } else {
+                    let usuario = {
                         email: req.body.email,
-                        user: req.body.user,
-                        password: bcrypt.hashSync (req.body.password, 10),
-                        avatar: req.file.filename
-                    } 
-                    user.create(user)
-                    .then(usuario => {
-                        return res.redirect('/')
-                    })
-                    .catch(e=>{
-                        console.log(e)
-                    })
+                        user:req.body.user,
+                        password: bcrypt.hashSync(req.body.password, 10),
+                        avatar: req.file.filename,
+                        birthday:req.body.birthday,
+                    }
+                    console.log(usuario)
+                    Usuario.create(usuario)
+                        .then(user => {
+                            return res.redirect('/usuarios')
+                            console.log(user)
+                        })
+                        .catch( err => console.log(err))
                 }
             })
+            .catch( err => console.log(err))
         }
-    }, 
+    },
     profile: function(req,res){
         let id = req.session.users.id
-        users.findByPk(id , {
+        user.findByPk(id , {
         where:[{
             association: 'products'
         }]

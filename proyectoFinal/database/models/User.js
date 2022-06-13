@@ -30,27 +30,28 @@ module.exports = function(sequelize, dataTypes){
         },
         updated_at:{
             type: dataTypes.DATE,
-        },
+        }
     }
 
     let config = {
-        tableName: 'users', 
-        timestamps: true, // Si la tabla no tiene los campos created_at y updated_at
-        underscored: true, // Si los nombres de las columnas en la db tienen guiones bajos en lugar de camelCase.        
+        tableName: "users",
+        timestamps: true,
+        underscored: true,
+        updated_at:"updateTimestamp"
     }
 
    const User = sequelize.define(alias, cols, config);
 
-   User.associate = function(model){
-    User.hasMany(model.Product, {
-        as: 'products', 
-        foreignKey: 'user_id'
-    }), 
-    User.hasMany(model.Comment, {
-        as: 'comentarios', 
-        foreignKey: 'user_id'
-    })
-   } 
+//    User.associate = function(model){
+//     User.hasMany(model.Product, {
+//         as: 'products', 
+//         foreignKey: 'user_id'
+//     }), 
+//     User.hasMany(model.Comment, {
+//         as: 'comentarios', 
+//         foreignKey: 'user_id'
+//     })
+   //} 
 
    return User;
 }

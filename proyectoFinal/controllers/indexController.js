@@ -5,7 +5,7 @@ const indexController = {
     index: function(req,res){
        db.Product.findAll({
            include: [{
-               association: 'users'},
+               association: 'user'},
                {association: 'comments'}
            ],
            order: [['created_at', 'DESC']]

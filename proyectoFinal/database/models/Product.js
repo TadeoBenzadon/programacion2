@@ -38,20 +38,17 @@ module.exports = function (sequelize, dataTypes) {
 
     const Product = sequelize.define(alias, cols, config);
 
-    /*Product.associate = function(models){
+ /*    Product.associate = function(models){
        
-        Product.belongsToMany(models.Comement, {
-             as: 'comments',
-             through: 'comment_product',
-             foreignKey: 'product_id',
-             otherKey: 'comment_id',
-             timestamps: false
+        Product.belongsTo(models.Comment, {
+             as: 'users',
+             foreignKey: 'user_id',
         }), 
-        Product.belongsTo(model.User, {
-            as: 'products', 
-            foreignKey: 'user_id'
+        Product.hasMany(models.User, {
+            as: 'comments', 
+            foreignKey: 'product_id'
         })
-    } */
+     }*/ 
     
     
     return Product;

@@ -32,19 +32,16 @@ let cols= {
     const Comment = sequelize.define(alias, cols, config);
 
     
-    Comment.associate = function(models){
-       Comment.belongsToMany(models.Product, {
+/*     Comment.associate = function(models){
+       Comment.belongsTo(models.Product, {
              as: 'products',
-             through: 'product_comment',
-             foreignKey: 'comment_id',
-             otherKey: 'product_id',
-             timestamps: false
+             foreignKey: 'product_id',
         }), 
     Comment.belongsTo(models.User, {
-        as: 'comentarios', 
+        as: 'user', 
         foreignKey: 'user_id'
     })
-    } 
+    }  */
     
     return Comment;
 }
