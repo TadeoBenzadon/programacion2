@@ -2,7 +2,6 @@ const bcrypt = require('bcryptjs');
 const db = require("../database/models"); 
 //const op = db.Sequelize.Op;
 const users = db.User; 
-const products = db.Product; 
 
 
 const usuariosController = { 

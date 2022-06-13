@@ -4,32 +4,36 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var db = require('./database/models'); 
-let session = require('express-session'); 
-const users = db.User; 
+let session = require('express-session');
+var app = express();
 
-app.use(session({
-	secret: 'userDb', 
-	resave: false,
-	saveUninitialized: true
-}))
-app.use(function(res, req, next){
-res.locals.users = req.session.users
-return next()
-})
+// app.use(function(res, req, next){
+//   res.locals.users = req.session.users
+//   return next()
+//   })
 
-app.use(function(res, req, next){
-if(req.session.users == undefined && req.cookies.userId !== undefined){
-	let idDeLaCookie = req.cookies.userId; 
-db.User.findByPk(idDeLaCookie)
-.then(function(user){
-	req.session.users = user
-	res.locals.users = user	
-	return next()
-})
-.catch(error => console.log(error))
-}
-return next()
-})
+
+// app.use(session({
+// 	secret: 'userDb', 
+// 	resave: false,
+// 	saveUninitialized: true
+// }))
+
+
+
+// app.use(function(res, req, next){
+// if(req.session.users == undefined && req.cookies.userId !== undefined){
+// 	let idDeLaCookie = req.cookies.userId; 
+// db.User.findByPk(idDeLaCookie)
+// .then(function(user){
+// 	req.session.users = user
+// 	res.locals.users = user	
+// 	return next()
+// })
+// .catch(error => console.log(error))
+// }
+// return next()
+// })
 
 
 var indexRouter = require('./routes/index');
@@ -38,7 +42,6 @@ var usuariosRouter = require('./routes/usuarios');
 
 
 
-var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,11 +53,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
-  secret:'productDb',
-  resave:false,
-  saveUnitialized: true
-}))
+
 
 app.use('/', indexRouter);
 app.use('/product', productRouter);
