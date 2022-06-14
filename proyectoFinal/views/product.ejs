@@ -6,25 +6,54 @@
 </head>
 <body>
 	<!-- Header -->
-	<%- include('partials/header.ejs') %> 
+	<% if( user.log ){ %>
+		<%- include('./partials/headerLogueado.ejs') %>
+		<%} else { %>
+		<%- include('./partials/header.ejs') %>
+	  
+		<% } %>
 
-	<!-- product detail heladera-->
+	<!-- product detail-->
 	<div class="container products-wrapper">
+
+		<% if( user.log ){ %>
+			<div class="col-12">
+			  <h2 class="products-title text-center">Bienvenid@ <%= user.name %> </h2>
+			</div>
+		  
+		  <%}%>  
+
 		<div class="d-flex align-items-center">
-			<h2 class="products-title"> Heladera Electrolux</h2>  
+			<h2 class="products-title"> <%= products.electro_name %></h2>  
+			
 			<p class="product-detail-description">
-				<a href="/product/add">Agregar</a>  
+				<% if (user.id== products.user_id) { %>
+					<a href="/product/productEdit/<%= products.id %> ">Editar</a>
+					<form action="/product/delete/<%= products.id %>" method="POST">
+						<button type="submit" class="btn btn-dark btn-outline-dark"> <i class="fas fa-trash" style="color: red;"></i></button>
+					</form>
+					
+					<% } %>
 			</p>
+		</div>
+		<div>
+			<h3><a href="/users/<%= products.user.id %> "> Añadido por <%= products.user.name%></a></h3>
 		</div>
 		<div class="product-detail">
 			<div class="row">
+				
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="/stylesheets/images/heladera.png" alt="imagen" class="product-detail-img">    
-					<p class="product-detail-description">"Heladera Electrolux Puerta Francesa Multidoor DM90X de 25 Pies, con Pantalla Táctil Blue Touch, iluminación Led, Doble cajón de Frutas y Vegetales, estantes de vidrio templado, Fábrica de hielo y Dispensador de Agua automático."	</p>                               <!-- agregar descripcion -->
+					<img src="/images/products/<%=products.electro_image%>" alt="imagen" class="product-detail-img">    
+					<p class="product-detail-description"></p>
+					<%=products.electro_description%>
 				</article>
+				
+				
 				<div class="col-12 col-lg-4">
 					<section class="comments">
 						<% for(let i=0; i<comentarios.length; i++){%>
+							<%	const comentariosUser = products.comment[i]; %>
+
 							<article>
 								<img src="https://via.placeholder.com/35" alt="">
 								<div class="data">

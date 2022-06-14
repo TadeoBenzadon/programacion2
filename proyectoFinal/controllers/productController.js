@@ -126,9 +126,7 @@ const productController ={
                         electro_name: {[op.like]: '%'+infoABuscar+'%'}
                     }, {
                         electro_description: {[op.like]: '%'+infoABuscar+'%'}
-                    },{
-                        electro_description: {[op.like]: '%'+infoABuscar+'%'}
-                    }, 
+                    },
                 ]
                 },
                 })
@@ -162,12 +160,10 @@ const productController ={
     store: function(req, res){
         let data = req.body;
         let product = {
-            electro_name: data. electro_name,            
-            electro_description: data.electro_description,
-            electro_image: data.electro_image,
-            electro_comments: electro_comments,
-            created_at:data.created_at,
-            updated_at:data.updated_at,
+            electro_name: data. electroName,            
+            electro_description: data.electroDescription,
+            electro_image: req.file.filename,
+            electro_comments: electroComments,
             user_id:data.user_id,
         } 
         db.Product.create(product)

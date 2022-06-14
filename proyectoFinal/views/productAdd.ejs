@@ -10,16 +10,30 @@
 	<!-- Header -->
 	<%- include('partials/header.ejs') %> 
 	<!-- /Header -->
-
-	<!-- Novedades -->
+	<% if (user.log) {%>
+		<%- include ('./partials/headerLogueado.ejd') %>
+		<%} else {%> 
+		<%-include ('./partials/header.ejs') %>
+		<%}<%
 	<div class="container products-wrapper">
 		<div class="row">
+			
+			<% if( user.log ){ %>
+			<div class="col-12">
+				<h2 class="products-title text-center">Bienvenid@ <%= user.name %> </h2>
+			</div>
+			<%}%> 
+
 			<div class="col-12">
 				<h2 class="products-title">Agregar productos</h2>
+		
 			</div>
-			<!-- Show the "ultimos" products -->
-			<div>
-				<form class= "formAngie" action="/" method="GET">
+		</div>
+			
+	</div>
+	
+	<div>
+		<form class= "formAngie" action="/product/productAdd" method="GET">
 					<div>
 						<label for="name">Producto:</label>
 				<input id="usuario" type="text" name="usuario" value="">
@@ -38,11 +52,8 @@
 				</form>
 	
 			</div>
-
-
-	<!-- footer -->
 	<%- include('partials/footer.ejs') %> 
-	<!-- /footer -->
+	
 </body>
 
 </html>
