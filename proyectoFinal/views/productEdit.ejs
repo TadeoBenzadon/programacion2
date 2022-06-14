@@ -16,12 +16,12 @@
 			
 			<% if( user.log ){ %>
 			<div class="col-12">
-				<h2 class="products-title text-center">Bienvenid@ <%= user %> </h2>
-			</div>
+				<h2 class="products-title text-center">Bienvenid@ <%= user %> </h2> 
+			</div>     <!-- VER USER.NAME -->
 			<%}%> 
 
 			<div class="col-12">
-				<h2 class="products-title">Agregar producto</h2>
+				<h2 class="products-title">Editar producto</h2>
 		
 			</div>
 		</div>
@@ -38,15 +38,10 @@
 						<label for="text">Descripción:</label>
 				<input id="usuario" type="text" name="usuario" value="">
 				</div>
-				<div>
-					<label for="date">Fecha de carga:</label>
-			<input id="fecha" type="date" name="fecha" value="">
-			</div>
-			<div>
-				<label for="">Imagen:</label>
-				<input type="file" name="electroImage" placeholder="" >
-		    </div>
-
+                <div>
+                    <label for="">Imagen:</label>
+                    <input type="file" name="electrImage" placeholder="" >
+                </div>
 				<div>
 						<button type="submit">Cargar</button> 
 				</div>

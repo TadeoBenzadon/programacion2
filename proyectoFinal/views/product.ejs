@@ -5,26 +5,19 @@
 	<%- include('partials/head.ejs') %>
 </head>
 <body>
-	<!-- Header -->
-	<% if( user.log ){ %>
-		<%- include('./partials/headerLogueado.ejs') %>
-		<%} else { %>
-		<%- include('./partials/header.ejs') %>
-	  
-		<% } %>
 
 	<!-- product detail-->
 	<div class="container products-wrapper">
 
 		<% if( user.log ){ %>
 			<div class="col-12">
-			  <h2 class="products-title text-center">Bienvenid@ <%= user.name %> </h2>
+			  <h2 class="products-title text-center">Bienvenid@ <%= user %> </h2>
 			</div>
 		  
 		  <%}%>  
 
 		<div class="d-flex align-items-center">
-			<h2 class="products-title"> <%= products.electro_name %></h2>  
+			<h2 class="products-title"> Editar producto</h2>  
 			
 			<p class="product-detail-description">
 				<% if (user.id== products.user_id) { %>
@@ -52,7 +45,7 @@
 				<div class="col-12 col-lg-4">
 					<section class="comments">
 						<% for(let i=0; i<comentarios.length; i++){%>
-							<%	const comentariosUser = products.comment[i]; %>
+							<%	const comentariosUser = products.electro_comment[i]; %>
 
 							<article>
 								<img src="https://via.placeholder.com/35" alt="">
@@ -67,6 +60,9 @@
 					</section>
 					<form class="form" action="/product" method="GET">
 						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
+						<input name="comment" class="form-input" type="text" value="" placeholder="Agregar comentario" minlength="5" >
+						<input name="idUser" type="hidden" value="<%= user.id  %> ">
+						<input name="idProduct" type="hidden" value="<%= products.id  %> ">
 						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
 					</form>
 					<hr>

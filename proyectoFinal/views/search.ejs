@@ -14,25 +14,40 @@
 	<!-- Novedades -->
 	<div class="container products-wrapper">
 		<div class="row">
+			<% if( user.log ){ %>
+				<div class="col-12">
+				  <h2 class="products-title text-center">Bienvenid@ <%= user.name %> </h2>
+				</div>  <!-- VER USER.NAME -->
+			  
+			  <%}%> 
 			<div class="col-12">
-				<h2 class="products-title">Resultados de búsqueda</h2>
+				<h2 class="products-title">Resultados de <em>"<%= result %>"</em></h2>
 			</div>
+			<% if (respuesta != '') { %>
+				<h2 style='color:red'><%= respuesta %> '<%= result %>'</h2>
+			  <% } %> 
 			<!-- Show the "ultimos" products -->
+			<% if (respuesta == "") { %>
+				<% for (const product of products) { %>
+			
 			<div class="col-12 ">
 				<section class="product-box">
-					<a href="/product">
+					<a href="/product/detail/<%= product.id %>">
 						<figure class="product-box_image">
-							<img src="<%=productos[0].imagen%>" alt="Heladera">
+							<img src="<%=productos.electro_image%>" alt="">
 						</figure>
 
 						<article class="product-box_data">
-							<h2><%=productos[0].nombre%></h2>
-							<p><%=productos[0].descripcion%></p>
+							<h2><%=productos.electro_name%></h2>
+							<p><%=productos.electro_descripcion%></p>
+							<p>Cantidad de comentarios: <%= product.electro_comments.length %> </p>
 						</article>
 					</a>
 				</section>
-			</div>
 
+			</div>
+<%}%>
+        <% } %>
 			
 	<!-- footer -->
 	<%- include('partials/footer.ejs') %> 
