@@ -24,5 +24,6 @@ router.post('/register', upload.single('avatar'), usuariosController.store);
 router.get('/profile/:userId', usuariosController.profile); 
 router.get('/profile/edit/:userId', usuariosController.profileEdit); 
 router.post('/profile/edit', upload.single('avatar'), usuariosController.profileUpdate); 
+router.get('/logout', usuariosController.logout); 
 
 module.exports = router;

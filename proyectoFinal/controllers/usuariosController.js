@@ -8,6 +8,18 @@ const usuariosController = {
     login: function(req, res){
         return res.render('login');
     },
+    
+    logout: function(req,res){
+        // Destruir la sessión
+        req.session.destroy();
+
+        // Destruir la cookie
+        res.clearCookie('userId');
+        
+        // Redireccionar a hone
+        return res.redirect('/')
+    },
+
     signIn: function(req,res){
         // let errors = {};
         Usuario.findOne({
@@ -87,7 +99,7 @@ const usuariosController = {
         }*/
         let usuario = {
             email: req.body.email,
-            user:req.body.user,
+            user_name:req.body.user,
             password: bcrypt.hashSync(req.body.password, 10),
             avatar: req.file.filename,
             birthday:req.body.birthday,

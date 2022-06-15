@@ -3,7 +3,7 @@ use janis_db;
 
 CREATE TABLE users (
 id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-user VARCHAR(200) ,
+user_name VARCHAR(200) ,
 birthday DATE ,
 email VARCHAR(350) ,
 password VARCHAR (385) ,

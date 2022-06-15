@@ -10,7 +10,7 @@ module.exports = function(sequelize, dataTypes){
             primaryKey: true,
             type: dataTypes.INTEGER,
         },
-        user:{
+        user_name:{
             type: dataTypes.STRING,
         },
         birthday:{

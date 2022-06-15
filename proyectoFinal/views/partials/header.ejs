@@ -45,8 +45,8 @@
                             </button>
                         </form>
                     </li> -->
-                    <%if(locals.user !== undefined){%> 
-                        <p>Hola <%=user.user%></p>
+                    <%if(user){%> 
+                        <p>Hola <%=user.user_name%></p>
                         <li><a href='/usuarios/logout'> Logout</a></li>
                         <li><a href='/usuarios/profile/<%=user.id%>'> Mi Perfil</a></li>
                         <li><a href='/product/add'> Agregar Producto</a></li>

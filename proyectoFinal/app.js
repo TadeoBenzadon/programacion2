@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: 'moviesDb',
+  secret: 'JaniseDb',
   resave: false,
   saveUninitialized: true
 }))
