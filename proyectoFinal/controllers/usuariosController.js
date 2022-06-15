@@ -34,7 +34,8 @@ const usuariosController = {
     },
     store: (req, res) =>{
         let errors = {};
-        if(req.body.user == ""){
+        //return res.send(req.body)
+        /*if(req.body.user == ""){
             errors.register = "Nombre no puede estar vacio"
             res.locals.errors = errors
             return res.render('register')
@@ -83,7 +84,21 @@ const usuariosController = {
                 }
             })
             .catch( err => console.log(err))
+        }*/
+        let usuario = {
+            email: req.body.email,
+            user:req.body.user,
+            password: bcrypt.hashSync(req.body.password, 10),
+            avatar: req.file.filename,
+            birthday:req.body.birthday,
         }
+        console.log(usuario)
+        Usuario.create(usuario)
+            .then(user => {
+                return res.redirect('/usuarios')
+                //console.log(user)
+            })
+            .catch( err => console.log(err))
     },
     profile: function(req,res){
         let id = req.session.user.id

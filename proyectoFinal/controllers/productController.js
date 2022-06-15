@@ -108,45 +108,6 @@ const productController ={
     
     search: function(req, res){
         return res.render ("searchResults", {db: db})
-        /*let infoABuscar = req.query.search; //obtengo la info de la querystring.
-      
-        db.Product.findAll({
-            //SELECT * FROM products
-            //WHERE title LIKE "%heladera%"
-                incule: [{
-                    association: 'users'},
-                    {association: 'comments',
-                    include: {
-                        association:'users'
-                    }
-                }],
-                where: {
-                    [op.or]: [{
-                        
-                        electro_name: {[op.like]: '%'+infoABuscar+'%'}
-                    }, {
-                        electro_description: {[op.like]: '%'+infoABuscar+'%'}
-                    },
-                ]
-                },
-                })
-
-            .then( data => {
-                console.log (data);
-                if (data == null || data == []|| data.length == 0){
-                    console.log ('no hay resultados')
-                    return res.render ('index', {
-                        title: 'Resultados | Janise Market',
-                        products: data,
-                        results: infoABuscar,
-                        respuesta: 'no se hay resultados criterios para su criterio de busqueda',
-                    })
-                }
-                return res.render('index',{products: data});
-            })
-            .catch( error => {
-                console.log(error);
-            })*/
     },
     productStore: function (req, res){
         const errors ={}
@@ -197,74 +158,7 @@ const productController ={
             });}else{
                 res.redirect ('/')
         }
-    }, 
-       
-    
-
-   /* createComment: function (req, res){
-        let data = req.body;
-        let errors = {}
-           
-        if (req.session.user != undefined){
-
-                let createComment = {
-                    product_id:data.products,
-                    user_id:data.users,
-                    texto_comentario: data.texto_comentario,
-                }
-        db.comment.create (createComment)
-        .then (data=> {
-            db.Prduct.findByPk(data.product_id)
-            .then(result => {
-                result.electro_comments +=1;
-                result.save ()
-                .then (info => {
-                    return res.redirect ("/electro/description/"+ createComment.product_id)
-                })
-            })
-        })
-    } else {
-            errors.message = 'para ingresar un comentario debe iniciar sesion'
-            res.locals.errors = errors 
-            return res.render ('login',{
-                title: 'login | Janise Market'
-            });
-        }
-    },
-
-    destroy: function (req,res){
-        let productBorrar = req.params.id;
-        db. Product.destroy ({
-            where: [{id: productBorrar}]
-        })
-        .then ((data)=> {
-            return res.redirect ('/');
-        })
-        .catch (error => {
-            console.log (error);
-        })
-    },
-    destroyComment: function (req,res){
-        let comentarioId =req.params.id;
-        db.Comment.destroy ({
-            where: [{
-                id:comentarioId}]
-        })
-        .then(()=> {
-            db.product.findByPk(req.body.product_id)
-            .then (result =>{
-                result.electro_comments -=1
-                result.save()
-                .then (info => {
-                    return res.redirect ('/electro/description/'+req.body.product_id);
-                })
-            })
-        })
-        .catch (error => {
-            console.log(error);
-        })
-    }*/
-}
+    }, }
 
 module.exports = productController
 /* Module.exports = {           VERRRRRRRRRRRRRR

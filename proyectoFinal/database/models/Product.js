@@ -10,15 +10,15 @@ module.exports = function (sequelize, dataTypes) {
         electro_name: {
             type: dataTypes.STRING,
         },
-        electro_description: {
+        /*electro_description: {
             type: dataTypes.TEXT,
-        },
+        },*/
         electro_image: {
             type: dataTypes.STRING,
         },
-        /*electro_comments: {
+        electro_comments: {
             type: dataTypes.INTEGER,
-        },*/
+        },
         created_at: {
             type: dataTypes.DATE,
         },
@@ -36,7 +36,7 @@ module.exports = function (sequelize, dataTypes) {
         underscored: true,
     }
 
-    /*const Product = sequelize.define(alias, cols, config);
+    const Product = sequelize.define(alias, cols, config);
 
      Product.associate = function(models){
        
@@ -45,10 +45,10 @@ module.exports = function (sequelize, dataTypes) {
              foreignKey: 'user_id',
         }), 
         Product.hasMany(models.Comment, {
-            as: 'comment', 
+            as: 'comments', 
             foreignKey: 'product_id'
         })
-     } */
+     } 
     
     
     return Product;

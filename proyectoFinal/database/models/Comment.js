@@ -32,7 +32,7 @@ let cols= {
     const Comment = sequelize.define(alias, cols, config);
 
     
-  /*Comment.associate = function(models){
+  Comment.associate = function(models){
        Comment.belongsTo(models.Product, {
              as: 'product',
              foreignKey: 'product_id',
@@ -41,7 +41,7 @@ let cols= {
         as: 'user', 
         foreignKey: 'user_id'
     })
-    }  */
+    }  
     
     return Comment;
 }
