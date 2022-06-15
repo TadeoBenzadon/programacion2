@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+
+<head>
+    <%- include('partials/head.ejs') %>
+</head>
+
+<body>
+    <!-- Header -->
+    <%- include('partials/header.ejs') %>
+        <!-- /Header -->
+
+        <!-- Novedades -->
+        <div class="container products-wrapper">
+            <div class="row">
+
+                <div class="col-12">
+                    <h2 class="products-title text-center">Resultados de busqueda </h2>
+                </div> <!-- VER USER.NAME -->
+
+                <% for (let i=0; i< data.products.lenght;i+=1){ <% <div class="col-12">
+                    <section class="product-box">
+                        <a href="/product/detail/<%= product.id %>">
+                            <figure class="product-box_image">
+                                <img src="<%=productos.electro_image%>" alt="">
+                            </figure>
+
+                            <article></article>
+
+                            <article class="product-box_data">
+                                <h2>
+                                    <%=productos.electro_name%>
+                                </h2>
+                                <p>
+                                    <%=productos.electro_descripcion%>
+                                </p>
+                                <p>Cantidad de comentarios: <%= product.electro_comments.length %>
+                                </p>
+                            </article>
+
+                        </a>
+
+                    </section>
+
+
+                    %>} %>
+
+
+
+                    <!-- footer -->
+                    <%- include('partials/footer.ejs') %>
+                        <!-- /footer -->
+</body>
+
+</html>

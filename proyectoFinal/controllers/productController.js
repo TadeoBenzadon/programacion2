@@ -18,14 +18,13 @@ module.exports = productController; */
 
 
 
-const db = require("../database/models")
+const db = require("../database/models");
+const products = require("../db/products");
 const op = db.sequelize.Op;
 
 const productController ={
     //index:hghgy,
     //add:jhjhj,
-
-
     show: function(req, res){
         let id = req.params.id
 
@@ -108,7 +107,8 @@ const productController ={
     },
     
     search: function(req, res){
-        let infoABuscar = req.query.search; //obtengo la info de la querystring.
+        return res.render ("searchResults", {db: db})
+        /*let infoABuscar = req.query.search; //obtengo la info de la querystring.
       
         db.Product.findAll({
             //SELECT * FROM products
@@ -146,19 +146,34 @@ const productController ={
             })
             .catch( error => {
                 console.log(error);
-            })
+            })*/
     },
-    create: function(req, res){
-        if (req.session.user != undefined){
-            return res.render ('productAdd',{
-                title: 'Agregar | Janise Market',
-            });}else{
-                res.redirect ('/')
+    productStore: function (req, res){
+        const errors ={}
+        if (req.body.elecro_name==""){
+            errors.message = "el nombre del producto es obligatorio";
+            res.locals.errors= errors;
+            return res.render ('productAdd')
+        }else if (req.file.mimetype !=='image/png' && req.file.mimetype !== 'image/jpg'){
+                errors.message = "el archivo debe ser jpg o png ";
+                res.locals.errors= errors;
+                return res.render ('productAdd')
+        }else if (req.body.description=""){
+            errors.message = "la descripcion del producto es obligatoria"; 
+            res.locals.errors= errors;
+            return res.render ('productAdd')
+        }else {
+            let producto = {
+                electro_name: data. electroName,            
+                electro_description: data.electroDescription,
+                electro_image: req.file.filename,
+                electro_comments: electroComments,
+                user_id:data.user_id,
+            } 
+            Producto.create (producto)
+            return res.redirect ("/")
         }
-    }, 
-       
-    store: function(req, res){
-        let data = req.body;
+        /*let data = req.body;
         let product = {
             electro_name: data. electroName,            
             electro_description: data.electroDescription,
@@ -172,9 +187,19 @@ const productController ={
             })
             .catch(error => {
                 console.log(error);
-            })
+            })*/
     },
 
+    create: function (req, res){
+        if (req.session.user != undefined){
+            return res.render ('productAdd',{
+                title: 'Agregar | Janise Market',
+            });}else{
+                res.redirect ('/')
+        }
+    }, 
+       
+    
 
    /* createComment: function (req, res){
         let data = req.body;

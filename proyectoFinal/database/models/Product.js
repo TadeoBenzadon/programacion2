@@ -36,7 +36,7 @@ module.exports = function (sequelize, dataTypes) {
         underscored: true,
     }
 
-    const Product = sequelize.define(alias, cols, config);
+    /*const Product = sequelize.define(alias, cols, config);
 
      Product.associate = function(models){
        
@@ -48,7 +48,7 @@ module.exports = function (sequelize, dataTypes) {
             as: 'comment', 
             foreignKey: 'product_id'
         })
-     }
+     } */
     
     
     return Product;
