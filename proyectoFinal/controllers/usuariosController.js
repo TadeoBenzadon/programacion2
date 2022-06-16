@@ -47,7 +47,7 @@ const usuariosController = {
     store: (req, res) =>{
         let errors = {};
         //return res.send(req.body)
-        /*if(req.body.user == ""){
+      /*  if(req.body.user == ""){
             errors.register = "Nombre no puede estar vacio"
             res.locals.errors = errors
             return res.render('register')
