@@ -10,20 +10,20 @@
 	<section class="info-usuario container products-wrapper">
 		<div class="row">
 			<div class="img-container offset-3 col-2">
-				<img src="/stylesheets/images/avatar/<%=avatar%>" alt="foto de perfil" class="foto-perfil">
+				<img src="/stylesheets/images/avatar/<%=user.avatar%>" alt="foto de perfil" class="foto-perfil">
 			</div>
 			<div class="data-container col-6">
 				<div class="d-flex align-items-center ">
 					<h1 class="main-title"> <%=user%>
-						<p><a href='/usuarios/profile/edit/<%=userId%>'> Editar Perfil
+						<p><a href='/usuarios/profile/edit/<%=user.id%>'> Editar Perfil
 							<i class="fas fa-cog"></i>
 						</a></p>
 					</h1>
 					
 				</div>
 				<div class="d-flex align-items-center ">
-					<h1 class="main-title"> <%=user%>
-						<p><a href='/products/edit/<%=products.id%>'>Editar Productos
+					<h1 class="main-title"> <%=user.user%>
+						<p><a href='/products/edit/<%=user.products.id%>'>Editar Productos
 							<i class="fas fa-cog"></i>
 						</a></p>
 					</h1>
@@ -31,9 +31,8 @@
 				</div>
 				<div>
 					<ul class="">
-						<li>8 productos</li>
-						<li>200 seguidores</li>
-						<li>300 comentarios</li>
+						<li><%= user.products.length%> producto/s</li>
+						<li><%= user.comments.length%> comentarios</li>
 					</ul>
 				</div>
 			</div>
@@ -45,16 +44,16 @@
 				</div>
 				<!-- Show mis productos -->
 				<div class="col-12 col-sm-6 col-lg-3">
-					<% for(let i=0; i<products.length; i++){%>
+					<% for(let i=0; i<user.products.length; i++){%>
 						<section class="product-box">
-							<a href="/detail/:<%=products[i].id%>">
+							<a href="/detail/:<%=user.products[i].id%>">
 								<figure class="product-box_image">
-									<img src="<%=products[i].electro_image%>" alt="">
+									<img src="<%=user.products[i].electro_image%>" alt="">
 								</figure>
 								<article class="product-box_data">
-									<h2> <%= products[i].electro_name%> </h2>
-									<p><%= products[i].electro_description%></p>
-									<p>Comentarios: </p>
+									<h2> <%= user.products[i].electro_name%> </h2>
+									<p><%= user.products[i].electro_description%></p>
+									<p>Comentarios: <%= user.products.eletro_comments%> </p>
 								</article>
 							</a>
 						</section>

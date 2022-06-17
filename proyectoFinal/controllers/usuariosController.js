@@ -45,43 +45,43 @@ const usuariosController = {
         }
     },
     store: (req, res) =>{
-        let errors = {};
+        let errors = {}
         //return res.send(req.body)
-      /*  if(req.body.user == ""){
-            errors.register = "Nombre no puede estar vacio"
+         if(req.body.user == ""){
+            errors.message = "Nombre no puede estar vacio"
             res.locals.errors = errors
             return res.render('register')
         }else if(req.body.email == ""){
-            errors.register = "Email no puede estar vacio"
+            errors.message = "Email no puede estar vacio"
             res.locals.errors = errors
             return res.render('register')
         }else if (req.body.password == ""){
-            errors.register = "Contraseña no puede estar vacio"
+            errors.message = "Contraseña no puede estar vacia"
             res.locals.errors = errors
             return res.render('register')
         } else if (req.body.password.length < 4){
-            errors.register = "Contraseña debe tener más de 3 caracteres"
+            errors.message = "Contraseña debe tener más de 3 caracteres"
             res.locals.errors = errors
             return res.render('register')
         }else if(req.body.password2 == ""){
-            errors.register = "Re escribir contraseña no puede estar vacio"
+            errors.message = "Re escribir contraseña no puede estar vacio"
             res.locals.errors = errors
-            return res.render('register')
+            return res.render('register') 
         } else {
            Usuario.findOne({where: [{ email : req.body.email}]})
             .then( user => {
                 if(user !=null){
-                    errors.register = "Email ya existe"
+                    errors.message = "Email ya existe"
                     res.locals.errors = errors
                     return res.render('register')
                 } else if(req.body.password != req.body.password2 ) {
-                    errors.register = "Las contraseñas no coinciden"
+                    errors.message = "Las contraseñas no coinciden"
                     res.locals.errors = errors
                     return res.render('register')
                 } else {
                     let usuario = {
                         email: req.body.email,
-                        user:req.body.user,
+                        user_name:req.body.user,
                         password: bcrypt.hashSync(req.body.password, 10),
                         avatar: req.file.filename,
                         birthday:req.body.birthday,
@@ -96,44 +96,32 @@ const usuariosController = {
                 }
             })
             .catch( err => console.log(err))
-        }*/
-        let usuario = {
-            email: req.body.email,
-            user_name:req.body.user,
-            password: bcrypt.hashSync(req.body.password, 10),
-            avatar: req.file.filename,
-            birthday:req.body.birthday,
         }
-        console.log(usuario)
-        Usuario.create(usuario)
-            .then(user => {
-                return res.redirect('/usuarios')
-                //console.log(user)
-            })
-            .catch( err => console.log(err))
     },
-    profile: function(req,res){
-        let id = req.session.user.id
-        Usuario.findByPk(id , {
-        include:[{
-            association: 'products'
-        }]
-        })
-        .then(data => {
-            res.render('profile', {
-            products: data,
-            user: Usuario.user,
-            userId: Usuario.id,
-            email: Usuario.email,
-            avatar: Usuario.avatar 
+    profile: (req, res) => {
+
+        Usuario.findByPk(req.params.id, {
+
+                include: [{
+                    association: 'products'
+                },{
+                    association: 'comments'
+                }
+           ]
             })
-        })
-        .catch(e=>{
-            console.log(e)
-        })
-       
-    
-    }, 
+            .then(user => {
+                 res.send(user)
+                res.render('profile', {
+                    user: user,
+                })
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    },
+
     profileEdit: function(req, res){
         let userId = req.params.userId;
 

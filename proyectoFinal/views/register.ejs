@@ -14,6 +14,11 @@
 			<div class="col-12">
 				<h2 class="products-title">Registrate</h2>
 			</div>
+			<% if(locals.errors){ %>
+				<h2 style="color:red">
+					<%= locals.errors.message %>
+				</h2>
+			<% } %>
 			<!-- Show the "ultimos" products -->
 			<div>
 				<form class= "formAngie" action="/usuarios/register" method="POST" enctype= 'multipart/form-data'>
@@ -42,19 +47,15 @@
 	<div>
 		<label for="email">Foto de perfil:</label>
 <input type="file" name="avatar" value="">
-<%if(locals.errors){%>
-<p><%= locals.errors.message %> </p>
-<%}%>
 </div>
-</div>
-
-				
 				<div>
 						<button type="submit">Enviar</button> 
 				</div>
 				</form>
 	
 			</div>
+</div>
+
 
 	<!-- footer -->
 	<%- include('partials/footer.ejs') %> 
