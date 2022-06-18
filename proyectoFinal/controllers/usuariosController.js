@@ -48,24 +48,29 @@ const usuariosController = {
         let errors = {}
         //return res.send(req.body)
          if(req.body.user == ""){
-            errors.message = "Nombre no puede estar vacio"
+            errors.message = "El usuario no puede estar vacio"
             res.locals.errors = errors
+            console.log(errors);
             return res.render('register')
         }else if(req.body.email == ""){
             errors.message = "Email no puede estar vacio"
             res.locals.errors = errors
+            console.log(errors);
             return res.render('register')
         }else if (req.body.password == ""){
             errors.message = "Contraseña no puede estar vacia"
             res.locals.errors = errors
+            console.log(errors);
             return res.render('register')
         } else if (req.body.password.length < 4){
             errors.message = "Contraseña debe tener más de 3 caracteres"
             res.locals.errors = errors
+            console.log(errors);
             return res.render('register')
         }else if(req.body.password2 == ""){
             errors.message = "Re escribir contraseña no puede estar vacio"
             res.locals.errors = errors
+            console.log(errors);
             return res.render('register') 
         } else {
            Usuario.findOne({where: [{ email : req.body.email}]})
@@ -73,10 +78,12 @@ const usuariosController = {
                 if(user !=null){
                     errors.message = "Email ya existe"
                     res.locals.errors = errors
+                    console.log(errors);
                     return res.render('register')
                 } else if(req.body.password != req.body.password2 ) {
                     errors.message = "Las contraseñas no coinciden"
                     res.locals.errors = errors
+                    console.log(errors);
                     return res.render('register')
                 } else {
                     let usuario = {
@@ -112,7 +119,7 @@ const usuariosController = {
                     return res.redirect('/')
                 }
                 else{
-                    res.render('profile', { user: user})
+                    res.render('profile', {user: user})
                 }
             })
             .catch(error => {
