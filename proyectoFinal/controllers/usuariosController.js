@@ -99,22 +99,21 @@ const usuariosController = {
         }
     },
     profile: (req, res) => {
-
-        Usuario.findByPk(req.params.id, {
-
-                include: [{
-                    association: 'products'
-                },{
-                    association: 'comments'
-                }
-           ]
-            })
+        const id = req.params.id
+      //  console.log(id);
+        Usuario.findByPk(id, {
+            include: [
+                {association: 'products'},
+                {association: 'comments'}
+            ]})
             .then(user => {
-                 res.send(user)
-                res.render('profile', {
-                    user: user,
-                })
-
+                console.log(user);
+                if(user == null){
+                    return res.redirect('/')
+                }
+                else{
+                    res.render('profile', { user: user})
+                }
             })
             .catch(error => {
                 console.log(error);
@@ -135,10 +134,11 @@ const usuariosController = {
             })
     },
     profileUpdate: function(req, res){
-        console.log(req.body)
+       // console.log(req.body)
         let user = {
-            user: req.body.user,
+            user_name: req.body.user,
             email: req.body.email,
+            birthday: req.body.birthday,
             password: bcrypt.hashSync(req.body.password, 10),
         }
 
