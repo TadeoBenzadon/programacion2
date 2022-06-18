@@ -1,7 +1,8 @@
 
 const db = require("../database/models")
+const op= db.sequelize.Op
 
-const indexController = { 
+const indexController = {
     index: function(req,res){
             db.Product.findAll({
                  include: [{
@@ -20,6 +21,7 @@ const indexController = {
                     console.log(error);
                 })
              }
-         }
-     
-module.exports = indexController; 
+            }
+
+
+module.exports = indexController 

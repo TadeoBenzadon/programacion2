@@ -8,40 +8,41 @@
 
 <body>
 	<!-- Header -->
-	<%- include('partials/header.ejs') %> 
-	<!-- /Header -->
+	<%- include('partials/header.ejs') %>
+		<!-- /Header -->
 
-	<div class="container products-wrapper">
-		<div class="row">
-			
-			<% if( user.log ){ %>
-			<div class="col-12">
-				<h2 class="products-title text-center">Bienvenid@ <%= user %> </h2>
-			</div>
-			<%}%> 
+		<div class="container products-wrapper">
+			<div class="row">
 
-			<div class="col-12">
-				<h2 class="products-title">Agregar producto</h2>
-		
+				<% if( user.log ){ %>
+					<div class="col-12">
+						<h2 class="products-title text-center">Bienvenid@ <%= user.name %>
+						</h2>
+					</div>
+					<%}%>
+
+						<div class="col-12">
+							<h2 class="products-title">Agregar producto</h2>
+
+						</div>
 			</div>
+
 		</div>
-			
-	</div>
-	
-	<div>
-		<form class= "formAngie" action="/product/productAdd" method="POST" enctype="multipart/form-data">
-			<label for="">Nombre:</label>
-			<input type="text" name="electroName" placeholder="">
-			<label for="">Descripción:</label>
-			<input type="text" name="electroDescription" placeholder="">
-			<label for="">Imagen:</label>
-			<input type="file" name="electroImage" placeholder="" accept=".jpg,.jpeg,.png" required>
-			<button type="submit" class="btn-outline-dark">Enviar</button>
-				</form>
-	
-			</div>
-	<%- include('partials/footer.ejs') %> 
-	
+
+		<div>
+			<form class="formAngie" action="/product/productAdd" method="POST" enctype="multipart/form-data">
+				<label for="">Nombre:</label>
+				<input type="text" name="electroName" placeholder="">
+				<label for="">Descripción:</label>
+				<input type="text" name="electroDescription" placeholder="">
+				<label for="">Imagen:</label>
+				<input type="file" name="electroImage" placeholder="" accept=".jpg,.jpeg,.png" required>
+				<button type="submit" class="btn-outline-dark">Enviar</button>
+			</form>
+
+		</div>
+		<%- include('partials/footer.ejs') %>
+
 </body>
 
 </html>

@@ -10,9 +10,9 @@ module.exports = function (sequelize, dataTypes) {
         electro_name: {
             type: dataTypes.STRING,
         },
-        /*electro_description: {
+        electro_description: {
             type: dataTypes.TEXT,
-        },*/
+        },
         electro_image: {
             type: dataTypes.STRING,
         },
@@ -25,9 +25,9 @@ module.exports = function (sequelize, dataTypes) {
         updated_at: {
             type: dataTypes.DATE,
         },
-        /*user_id: {
+        user_id: {
             type: dataTypes.INTEGER,
-        },*/
+        }
     }
 
     let config = {

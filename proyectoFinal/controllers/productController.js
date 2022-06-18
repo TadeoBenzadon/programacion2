@@ -1,196 +1,283 @@
-/* const products = require("../db/products")
-const comentarios = require("../db/comentarios")
-
-const productController = {
-    index: function (req, res) {
-        return res.render('product', { productos: products.lista, comentarios: comentarios.lista })
-    },
-    add: function (req, res) {
-        return res.render('productAdd', { productos: products.lista }
-        )
-    },
-    search: function (req, res) {
-        return res.render('search', { productos: products.lista })
-    }
-}
-
-module.exports = productController; */
-
-
 
 const db = require("../database/models");
-const products = require("../db/products");
+
 const op = db.sequelize.Op;
 
-const productController ={
-    //index:hghgy,
-    //add:jhjhj,
-    show: function(req, res){
+const productController = {
+    show: function (req, res) {
         let id = req.params.id
 
         db.Product.findByPk(id, {
             include: [{
-                association: 'comments',
-                include: { association: 'users'
-            }
-        },  
-        {
-            asossiarion: 'users'
-        },
+                association: 'comment',
+                include: {
+                    association: 'user'
+                }
+            },
+            {
+                asossiation: 'user'
+            },
             ],
-            order:[
-                ['comments','id','desc']
+            order: [
+                ['comment', 'id', 'desc']
             ],
         })
-        .then((data)=>{
-            if (!data){
-                res.redirect ('/')
-            }
-           return res.render('product', 
-            {product: data,
-            title: 'peroductos | Janise Market'});
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+            .then(data => {
+                if (!data) {
+                    res.redirect('/')
+                }
+                return res.render('product',
+                    {
+                        product: data,
+                        title: 'peroductos | Janise Market'
+                    });
+            })
+            .catch(error => {
+                console.log(error)
+            })
     },
-    edit: (req, res)=> {
+    edit: (req, res) => {
         db.Product.findByPk(req.params.id)
-           .then ((data)=>{
-               if(!data){
-                   res.redirect('/')} else if (req.session.user.id != data.user_id){
-                       res.redirect ('/usuarios'+ req.session.user.id)
-                   }
-                   return res.render ('product-edit', {
-                       title: 'Editar | Janise Market',
-                       product: data,
-                       id: req.params.id,
-                   })
-           })
+            .then((data) => {
+                if (!data) {
+                    res.redirect('/')
+                } else if (req.session.user.id != data.user_id) {
+                    res.redirect('/usuarios/' + req.session.user.id)
+                }
+                return res.render('productEdit', {
+                    title: 'Editar | Janise Market',
+                    product: data,
+                    id: req.params.id,
+                })
+            })
     },
 
-    editForm: function (req, res) {
+    editForm: (req, res) =>{
 
         let data = req.body;
-        if (req.file != undefined){
-            var products = {
-             electro_name: data. electro_name,            
-            electro_description: data.electro_description,
-            electro_image: data. electro_image,
-            electro_comments: data.electro_comments,
-            created_at:data.created_at,
-            updated_at:data.updated_at,
-            user_id:data.user_id,
+        if (req.file != undefined) {
+            var electro = {
+                electro_name: data.electroName,
+                electro_description: data.electroDescription,
+                electro_image: req.file.filename,
             }
         } else {
-            var products = {
-            electro_name: data. electro_name,            
-            electro_description: data.electro_description,
-            electro_comments: data.electro_comments,
-            created_at:data.created_at,
-            updated_at:data.updated_at,
-            user_id:data.user_id,
+            var electro = {
+                electro_name: data.electroName,
+                electro_description: data.electroDescription,
+                electro_image: req.file.filename,
             }
         }
-        db.Product.update (products, {
+        db.Product.update(electro, {
             where: {
                 id: req.body.id
             }
         })
-        .then(function (productUpdate){
-            console.log(productUpdate)
-            return res.redirect ('/')
-        })
-        .catch (error => {
-            console.log (error);
-        })
+            .then(function (productUpdate) {
+                console.log(productUpdate)
+                return res.redirect('/')
+            })
+            .catch(error => {
+                console.log(error);
+            })
     },
-    
-    search: function(req, res){
-        return res.render ("searchResults", {db: db})
+
+    search: (req, res) => {
+
+        let infoABuscar = req.query.search; // Obtengo la info de la querystring.
+
+        db.Product.findAll({
+
+            include: [{
+                association: 'user'
+            }, {
+                association: 'comment',
+                include: {
+                    association: 'user'
+                }
+            }],
+
+            where: {
+                [op.or]: [{
+                    electro_name: {
+                        [op.like]: '%' + infoABuscar + '%'
+                    }
+                },
+                ]
+            },
+
+        })
+            .then(data => {
+                console.log(data);
+                if (data == null || data == [] || data.length == 0) {
+                    console.log('No hay resultados');
+                    return res.render('searchResults', {
+                        title: 'Resultados |Janise Market',
+                        products: data,
+                        result: infoABuscar,
+                        respuesta: 'No se encontraron resultados para ' //terminar
+                    });
+
+                }
+                return res.render('searchResults', {
+                    title: 'Resultados | Janise Market',
+                    products: data,
+                    result: infoABuscar,
+                    respuesta: ''
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
     },
-    productStore: function (req, res){
-        const errors ={}
-        if (req.body.elecro_name==""){
-            errors.message = "el nombre del producto es obligatorio";
-            res.locals.errors= errors;
-            return res.render ('productAdd')
-        }else if (req.file.mimetype !=='image/png' && req.file.mimetype !== 'image/jpg'){
-                errors.message = "el archivo debe ser jpg o png ";
-                res.locals.errors= errors;
-                return res.render ('productAdd')
-        }else if (req.body.description=""){
-            errors.message = "la descripcion del producto es obligatoria"; 
-            res.locals.errors= errors;
-            return res.render ('productAdd')
-        }else {
-            let producto = {
-                electro_name: data. electroName,            
-                electro_description: data.electroDescription,
-                electro_image: req.file.filename,
-                electro_comments: electroComments,
-                user_id:data.user_id,
-            } 
-            Producto.create (producto)
-            return res.redirect ("/")
+
+    create: (req, res) => {
+        // Renderizar la vista de Product Add
+        if (req.session.user != undefined) {
+
+            return res.render('product-add', {
+                title: 'Agregar | Janise Market',
+            });
+        } else {
+            res.redirect('/')
         }
-        /*let data = req.body;
-        let product = {
-            electro_name: data. electroName,            
+    },
+
+    productStore: function (req, res) {
+        // Método para guardar nuevo Vino.
+        //1) Obtener datos del formulario
+
+        let data = req.body;
+
+        //2) Crear vino nuevo.
+        let electro = {
+            electro_name: data.electroName,
             electro_description: data.electroDescription,
             electro_image: req.file.filename,
-            electro_comments: electroComments,
-            user_id:data.user_id,
-        } 
-        db.Product.create(product)
-            .then( (productCreado) => {
+            electro_comments: 0,
+            user_id: res.locals.user.id
+
+        }
+        //3) Guardar Vino
+        db.Product.create(electro)
+            .then((electroCreado) => {
+                //4)Redirección
                 return res.redirect('/');
             })
             .catch(error => {
                 console.log(error);
-            })*/
+            })
     },
+    createComment: function (req, res) {
+        let data = req.body;
+        let errors = {}
 
-    create: function (req, res){
-        if (req.session.user != undefined){
-            return res.render ('productAdd',{
-                title: 'Agregar | Janise Market',
-            });}else{
-                res.redirect ('/')
+        if (req.session.user != undefined) {
+
+            let createComment = {
+                product_id: data.idProduct,
+                user_id: data.idUser,
+                texto_comentario: data.comment,
+            }
+
+            db.Comment.create(createComment)
+                .then(data => {
+
+
+                    db.Product.findByPk(data.product_id)
+                        .then(result => {
+                            result.electro_comments += 1;
+                            result.save()
+                                .then(info => {
+
+                                    return res.redirect("/product/detail/" + createComment.product_id)
+                                })
+
+                        })
+
+
+                })
+        } else {
+            errors.message = 'Para ingresar un comentario debe iniciar sesión'
+            res.locals.errors = errors
+            return res.render('login', {
+                title: 'Login | Janis Market'
+            });
         }
-    }, }
+    },
 
-module.exports = productController
-/* Module.exports = {           VERRRRRRRRRRRRRR
-    Index: (req, res) => {
-        res.render('index')
-    },
-    listarProducto: (req, res) => {
-        db.product.findAll({
-            order: [
-                ['nombre_id'= 'ASC']
-            ],
-            Limit: 3
+    destroy: function (req, res) {
+
+        let electrodomesticoBorrar = req.params.id;
+        db.Product.destroy({
+            where: [{
+                id: electrodomesticoBorrar
+            }]
         })
-            .then((producto) => {
-                res.send(producto)
+            .then((data) => {
+
+                return res.redirect('/');
+
+            })
+            .catch(error => {
+                console.log(error);
             })
     },
-    detalleProducto: (req, res) => {
-        db.product.findByPk(re.params.id)
-            .then(producto => {
-                res.send(producto)
+    destroyComment: function (req, res) {
+
+        let comentarioId = req.params.id;
+        db.Comment.destroy({
+            where: [{
+                id: comentarioId
+            }]
+        })
+            .then(() => {
+                db.Product.findByPk(req.body.idProduct)
+                    .then(result => {
+                        result.electro_comments -= 1
+                        result.save()
+                            .then(info => {
+
+                                return res.redirect('/product/detail/' + req.body.idProduct);
+                            })
+                    })
+            })
+            .catch(error => {
+                console.log(error);
             })
     },
-    buscarProducto: (req, res) => {
-    db.product.findOne({
-        where: [{
-            title: req.params.title
-        }]
-    })
-        .then(producto => {
-            res.sen(producto)
-        })
+    productUpdate: function (req, res) {
+        const id = req.params.id;
+        Product.findByPk(id)
+            .then(data => {
+                const productos = {
+                    electro_name: req.body.electroName,
+                    electro_image: "",
+                    electro_description: req.body.electroDescription,
+                }
+                if (req.file == undefined) {
+                    productos.electro_image = data.electroImages;
+                } else {
+                    productos.electro_image = req.file.filename;
+                }
+
+                productos.update(product, {
+                    where: {
+                        product_id: id
+                    }
+                })
+                    .then(function () {
+                        return res.redirect("/")
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
+            })
+    }
+
+
+
 }
 
-} */
+module.exports = productController;
