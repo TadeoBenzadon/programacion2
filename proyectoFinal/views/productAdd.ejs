@@ -29,27 +29,14 @@
 	</div>
 	
 	<div>
-		<form class= "formAngie" action="/product/productAdd" method="GET">
-					<div>
-						<label for="name">Producto:</label>
-				<input id="usuario" type="text" name="usuario" value="">
-				</div>
-					<div>
-						<label for="text">Descripción:</label>
-				<input id="usuario" type="text" name="usuario" value="">
-				</div>
-				<div>
-					<label for="date">Fecha de carga:</label>
-			<input id="fecha" type="date" name="fecha" value="">
-			</div>
-			<div>
-				<label for="">Imagen:</label>
-				<input type="file" name="electroImage" placeholder="" >
-		    </div>
-
-				<div>
-						<button type="submit">Cargar</button> 
-				</div>
+		<form class= "formAngie" action="/product/productAdd" method="POST" enctype="multipart/form-data">
+			<label for="">Nombre:</label>
+			<input type="text" name="electroName" placeholder="">
+			<label for="">Descripción:</label>
+			<input type="text" name="electroDescription" placeholder="">
+			<label for="">Imagen:</label>
+			<input type="file" name="electroImage" placeholder="" accept=".jpg,.jpeg,.png" required>
+			<button type="submit" class="btn-outline-dark">Enviar</button>
 				</form>
 	
 			</div>

@@ -29,25 +29,18 @@
 	</div>
 	
 	<div>
-		<form class= "formAngie" action="/product/productAdd" method="GET">
-					<div>
-						<label for="name">Producto:</label>
-				<input id="usuario" type="text" name="usuario" value="">
-				</div>
-					<div>
-						<label for="text">Descripción:</label>
-				<input id="usuario" type="text" name="usuario" value="">
-				</div>
-                <div>
-                    <label for="">Imagen:</label>
-                    <input type="file" name="electrImage" placeholder="" >
-                </div>
-				<div>
-						<button type="submit">Cargar</button> 
-				</div>
-				</form>
-	
-			</div>
+		<form class="register-form col-6" action="/product/product-edit" method="POST" enctype="multipart/form-data">
+			<input type="hidden" name="id" value="<%= product.id %>">
+			<label for="">Nombre:</label>
+			<input type="text" name="electroName" placeholder="" value="<%= product.electro_name %>">
+			<label for="">Descripción:</label>
+			<input type="text" name="electroDescription" placeholder="" value="<%= product.electro_description %>">
+			<label for="">Imagen:</label>
+			<input type="file" name="electroImage" placeholder="" >
+			<button type="submit" class="btn-outline-dark">Enviar</button>
+		</form>
+	</div>
+	  		</div>
 	<%- include('partials/footer.ejs') %> 
 	
 </body>
