@@ -77,11 +77,6 @@ const productController = {
                 console.log(error);
             })
     },
-
-    search:  (req, res) => {
-        return res.render('search')
-    },
-
     searchResults: (req, res) => {
 
         let infoABuscar = req.query.search; // Obtengo la info de la querystring.
@@ -103,22 +98,24 @@ const productController = {
                         [op.like]: '%' + infoABuscar + '%'
                     }
                 },
+                {
+                    electro_description: {
+                        [op.like]: '%' + infoABuscar + '%'
+                    }
+                }
                 ]
-            },
+          }
         })
             .then(data => {
                 console.log(data);
                 if (data == null || data == [] || data.length == 0) {
                     console.log('No hay resultados');
-                    return res.render('searchResults', {
+                    return res.render('search', {
                         title: 'Resultados |Janise Market',
-                        products: data,
-                        result: infoABuscar,
-                        respuesta: 'No se encontraron resultados para ' //terminar
+                        respuesta: 'No se encontraron resultados para ' + infoABuscar 
                     });
-
                 }
-                return res.render('searchResults', {
+                return res.render('search', {
                     title: 'Resultados | Janise Market',
                     products: data,
                     result: infoABuscar,
@@ -154,10 +151,9 @@ const productController = {
             electro_description: data.electroDescription,
             electro_image: req.file.filename,
             electro_comments: 0,
-            user_id: res.locals.user.id
-
+            user_id: req.session.user.id
         }
-      
+      console.log(electro)
         Producto.create(electro)
             .then((electroCreado) => {
                 //4)Redirección
@@ -176,26 +172,13 @@ const productController = {
 
             let createComment = {
                 product_id: data.idProduct,
-                user_id: data.idUser,
+                user_id: req.session.user.id,
                 texto_comentario: data.comment,
             }
 
             Comentarios.create(createComment)
                 .then(data => {
-
-
-                    Producto.findByPk(data.product_id)
-                        .then(result => {
-                            result.electro_comments += 1;
-                            result.save()
-                                .then(info => {
-
-                                    return res.redirect("/product/detail/" + createComment.product_id)
-                                })
-
-                        })
-
-
+                    return res.redirect("/product/detail/" + createComment.product_id)
                 })
         } else {
             errors.message = 'Para ingresar un comentario debe iniciar sesión'

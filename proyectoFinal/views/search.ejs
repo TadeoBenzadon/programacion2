@@ -24,25 +24,27 @@
 			<!-- Show the "ultimos" products -->
 			<% if (respuesta == "") { %>
 				<% for (const product of products) { %>
-			
-			<div class="col-12 ">
-				<section class="product-box">
-					<a href="/product/detail/<%= product.id %>">
-						<figure class="product-box_image">
-							<img src="<%=productos.electro_image%>" alt="">
-						</figure>
-
-						<article class="product-box_data">
-							<h2><%=productos.electro_name%></h2>
-							<p><%=productos.electro_descripcion%></p>
-							<p>Cantidad de comentarios: <%= product.electro_comments.length %> </p>
-						</article>
-					</a>
-				</section>
-
-			</div>
-<%}%>
+					<div class="col-12 col-sm-6 col-lg-3">
+					  <section class="product-box">
+						<a href="/product/detail/<%= product.id %> ">
+						  <figure class="product-box_image">
+							<img src="/stylesheets/images/<%=product.electro_image %>" alt="">
+						  </figure>
+						  <article class="product-box_data">
+							<h2><%= product.electro_name %></h2>
+							<p>Cantidad de comentarios: <%= product.comments.length %> </p>
+							<img src="<%= product.user.avatar %>" style=" border-radius: 50%;" alt="">
+						  <a style="text-decoration-line: underline !important; font-size: 15px;" href='/users/<%= product.user.id %> '>Añadido por <%= product.user_name %> </a>
+	
+						  
+							</article>
+						</a>
+					</section>
+				</div>
+				<%}%>
         <% } %>
+	</div>
+</div>
 			
 	<!-- footer -->
 	<%- include('partials/footer.ejs') %> 
