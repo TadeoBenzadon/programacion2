@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const productController = require('../controllers/indexController')
+const productController = require('../controllers/productController')
 
 const multer = require('multer')
-const path = require('path')
+const path = require('path');
+const { Router } = require('express');
 
 
 
@@ -19,16 +20,18 @@ var storage = multer.diskStorage({
   var upload = multer({ storage: storage })
 
 
-/*
+
 router.get('/detail/:id', productController.show);
-router.get('/product/edit/:id', productController.edit);
-router.post('/product/edit', upload.single('electroImage'), productController.editForm);
-router.get('/results', productController.search); 
-router.get('/product/add', productController.create);
-router.post('/product/add', upload.single('electroImage'), productController.productStore);
+router.get('/edit/:id', productController.edit);
+router.get('/edit', upload.single('electro_images'), productController.productUpdate); 
+router.post('/edit', upload.single('electroImage'), productController.editForm);
+router.get('/results/:search', productController.search); 
+router.post('results', productController.searchResults)
+router.get('/add', productController.create);
+router.post('/add', upload.single('electroImage'), productController.productStore);
 router.post('/delete/:id?', productController.destroy);
 router.post('/comment', productController.createComment);
 router.post('/comment/delete/:id?', productController.destroyComment);
-router.get('/product/edit', upload.single('electro_images'), productController.productUpdate);*/
+
 
 module.exports = router;

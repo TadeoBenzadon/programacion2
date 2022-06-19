@@ -1,54 +1,50 @@
-
-const db = require("../database/models");
-
-const op = db.sequelize.Op;
+const db = require("../database/models"); 
+const op = db.Sequelize.Op;
+const Producto = db.Product;
+const Comentarios = db.Comment;
 
 const productController = {
     show: function (req, res) {
         let id = req.params.id
 
-        db.Product.findByPk(id, {
+        Producto.findByPk(id, {
             include: [{
-                association: 'comment',
-                include: {
-                    association: 'user'
-                }
+                association: 'comments', include: {association: 'user'}
             },
             {
-                asossiation: 'user'
-            },
+                association: 'user'
+            }
             ],
             order: [
-                ['comment', 'id', 'desc']
+                ['comments', 'id', 'desc']
             ],
         })
             .then(data => {
+               // res.send(data)
                 if (!data) {
                     res.redirect('/')
                 }
                 return res.render('product',
                     {
-                        product: data,
-                        title: 'peroductos | Janise Market'
+                        products: data,
+                        title: 'Productos | Janise Market'
                     });
             })
             .catch(error => {
                 console.log(error)
             })
-    },
+    } ,
     edit: (req, res) => {
-        db.Product.findByPk(req.params.id)
+        Producto.findByPk(req.params.id)
             .then((data) => {
                 if (!data) {
                     res.redirect('/')
-                } else if (req.session.user.id != data.user_id) {
-                    res.redirect('/usuarios/' + req.session.user.id)
-                }
+                } else {
                 return res.render('productEdit', {
                     title: 'Editar | Janise Market',
                     product: data,
                     id: req.params.id,
-                })
+                })}
             })
     },
 
@@ -68,7 +64,7 @@ const productController = {
                 electro_image: req.file.filename,
             }
         }
-        db.Product.update(electro, {
+        Producto.update(electro, {
             where: {
                 id: req.body.id
             }
@@ -82,16 +78,20 @@ const productController = {
             })
     },
 
-    search: (req, res) => {
+    search:  (req, res) => {
+        return res.render('search')
+    },
+
+    searchResults: (req, res) => {
 
         let infoABuscar = req.query.search; // Obtengo la info de la querystring.
 
-        db.Product.findAll({
+        Producto.findAll({
 
             include: [{
                 association: 'user'
             }, {
-                association: 'comment',
+                association: 'comments',
                 include: {
                     association: 'user'
                 }
@@ -105,7 +105,6 @@ const productController = {
                 },
                 ]
             },
-
         })
             .then(data => {
                 console.log(data);
@@ -136,7 +135,7 @@ const productController = {
         // Renderizar la vista de Product Add
         if (req.session.user != undefined) {
 
-            return res.render('product-add', {
+            return res.render('productAdd', {
                 title: 'Agregar | Janise Market',
             });
         } else {
@@ -145,12 +144,11 @@ const productController = {
     },
 
     productStore: function (req, res) {
-        // Método para guardar nuevo Vino.
-        //1) Obtener datos del formulario
+    
 
         let data = req.body;
 
-        //2) Crear vino nuevo.
+        
         let electro = {
             electro_name: data.electroName,
             electro_description: data.electroDescription,
@@ -159,8 +157,8 @@ const productController = {
             user_id: res.locals.user.id
 
         }
-        //3) Guardar Vino
-        db.Product.create(electro)
+      
+        Producto.create(electro)
             .then((electroCreado) => {
                 //4)Redirección
                 return res.redirect('/');
@@ -169,6 +167,7 @@ const productController = {
                 console.log(error);
             })
     },
+
     createComment: function (req, res) {
         let data = req.body;
         let errors = {}
@@ -181,11 +180,11 @@ const productController = {
                 texto_comentario: data.comment,
             }
 
-            db.Comment.create(createComment)
+            Comentarios.create(createComment)
                 .then(data => {
 
 
-                    db.Product.findByPk(data.product_id)
+                    Producto.findByPk(data.product_id)
                         .then(result => {
                             result.electro_comments += 1;
                             result.save()
@@ -210,7 +209,7 @@ const productController = {
     destroy: function (req, res) {
 
         let electrodomesticoBorrar = req.params.id;
-        db.Product.destroy({
+        Producto.destroy({
             where: [{
                 id: electrodomesticoBorrar
             }]
@@ -227,13 +226,13 @@ const productController = {
     destroyComment: function (req, res) {
 
         let comentarioId = req.params.id;
-        db.Comment.destroy({
+        Comentarios.destroy({
             where: [{
                 id: comentarioId
             }]
         })
             .then(() => {
-                db.Product.findByPk(req.body.idProduct)
+                Producto.findByPk(req.body.idProduct)
                     .then(result => {
                         result.electro_comments -= 1
                         result.save()
@@ -249,7 +248,7 @@ const productController = {
     },
     productUpdate: function (req, res) {
         const id = req.params.id;
-        Product.findByPk(id)
+        Producto.findByPk(id)
             .then(data => {
                 const productos = {
                     electro_name: req.body.electroName,
@@ -262,7 +261,7 @@ const productController = {
                     productos.electro_image = req.file.filename;
                 }
 
-                productos.update(product, {
+                Producto.update(product, {
                     where: {
                         product_id: id
                     }
@@ -275,7 +274,7 @@ const productController = {
                     });
             })
     }
-
+ 
 
 
 }

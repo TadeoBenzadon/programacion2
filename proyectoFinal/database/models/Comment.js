@@ -34,7 +34,7 @@ let cols= {
     
   Comment.associate = function(models){
        Comment.belongsTo(models.Product, {
-             as: 'product',
+             as: 'products',
              foreignKey: 'product_id',
         }), 
     Comment.belongsTo(models.User, {

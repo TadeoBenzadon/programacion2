@@ -20,7 +20,7 @@
 			
 			<p class="product-detail-description">
 				<% /* if (user.id== products.user.id) {*/ %>
-					<a href="/product/productEdit/<%= products.id %> ">Editar</a>
+					<a href="/product/edit/<%= products.id %> ">Editar</a>
 					<form action="/product/delete/<%= products.id %>" method="POST">
 						<button type="submit" class="btn btn-dark btn-outline-dark"> <i class="fas fa-trash" style="color: red;"></i></button>
 					</form>
@@ -29,14 +29,14 @@
 			</p>
 		</div>
 		<div>
-			<h3><a href="/useruarios/<%= products.user.id %> "> Añadido por <%= products.user.name%></a></h3>
+			<h3><a href="/usuarios/<%= products.user.id %> "> Añadido por <%= products.user.name%></a></h3>
 		</div>
 		<div class="product-detail">
 			<div class="row">
 				
 			
 				<article class="col-12 col-lg-8 product-detail-info">  
-					<img src="/images/<%=products.electro_image%>" alt="imagen" class="product-detail-img">   
+					<img src="../public/stylesheets/images/<%=products.electro_image%>" alt="imagen" class="product-detail-img">   
 		<!-- ver si poner /images/products... o solo images -->
 					<p class="product-detail-description"></p>
 					<%=products.electro_description%>
@@ -46,31 +46,30 @@
 				
 				<div class="col-12 col-lg-4">
 					<section class="comments">
-						<% for(let i=0; i<products.comment.length; i++){%>
-							<%	const comentariosUser = products.comment[i]; %>
+						<% for(let i=0; i<products.electro_comments; i++){%>
+							<%	const comentariosUser = products.comments[i]; %>
 
 							<article>
-								<img src="/images/avatar/<%= comentarioUser.user.avatar  %>" alt=""> <!-- https://via.placeholder.com/35--> 
+								<img src="../public/stylesheets/images/avatars/<%=products.user.avatar%>" alt=""> <!-- https://via.placeholder.com/35--> 
 								<div class="data">
 									<p class="user">
 
-									 <strong> <a href="/users/<%= comentarioUser.user_id %>"><%= comentarioUser.userName %>: </a> </strong>
-										<%= comentarioUser.texto_comentario %></p>
-										<% if (user.id == comentarioUser.user_id ) { %>
-										 <form action="/product/comment/delete/<%= comentarioUser.id %>" method="POST">
+									 <strong> <a href="/usuarios/profile/<%=products.user.id %>"><%= user.user_name %>: </a> </strong>
+										<%= comentariosUser.texto_comentario %></p>
+										 <form action="/product/comment/delete/<%= comentariosUser.id %>" method="POST">
 											<input type="hidden" value="<%= products.id %>" name="idProduct" >
 											<button type="submit" class="btn btn-dark btn-outline-dark"> <i class="fas fa-trash" style="color: #B99871;"></i></button>
 										</form>
-										<% } %>
+										
 								</div>
 							</article>
 							<%}%>
 					
 					</section>
-					<form class="form" action="/product/comment" method="GET">
+					<form class="form" action="/product/comment" method="POST">
 						<input name="comment" class="form-input" type="text" value="" placeholder="Agregar comentario" minlength="5" >
-						<input name="idUser" type="hidden" value="<%= user.id  %> ">
-						<input name="idProduct" type="hidden" value="<%= products.id  %> ">
+						<input name="idUser" type="hidden" value="">
+						<input name="idProduct" type="hidden" value="<%= products.id%> ">
 						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
 					</form>
 					<hr>
