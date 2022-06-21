@@ -27,11 +27,19 @@ const usuariosController = {
         })
             .then(function(user){
                 //return res.send(user)
+                let errors= {}
                 req.session.user = user
-
+                if(req.body.password != user.password){
+                    errors.message = "El usuario o la contraseña son incorrectos"
+                    res.locals.errors = errors
+                    console.log(errors);
+                    return res.render('login')
+                }
+                else{
                 //preguntar si el usuario tildó el checkbox 'recordarme''
                 res.cookie('userId', user.id, {maxAge: 1000*60*5})
                 return res.redirect('/')
+                }
 
             })
             .catch( error => console.log(error))        

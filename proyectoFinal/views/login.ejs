@@ -11,6 +11,11 @@
     <div class="col-12">
         <h2 class="products-title">Ingresá</h2>
     </div>
+    <% if(locals.errors){ %>
+        <h2 style="color:red">
+            <%= locals.errors.message %>
+        </h2>
+    <% } %>
 			<!-- Show the "ultimos" products -->
 			<div>
 			<form class= "formAngie" action="/usuarios" method="POST">
