@@ -15,7 +15,7 @@ updated_at DATE
 
 INSERT INTO users 
 VALUES
-(DEFAULT, "JuPerez", "1974-03-2", "   Juperez23@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "juana.jpg", DEFAULT, DEFAULT),
+(DEFAULT, "JuPerez", "1974-03-2", " =Juperez23@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "juana.jpg", DEFAULT, DEFAULT),
 (DEFAULT, "PePerez", "1991-02-09", "Perezpepe@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "pedro.jpg", DEFAULT, DEFAULT),
 (DEFAULT, "MaCreed", "1964-05-20", "Creed89@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "martina.jpg", DEFAULT, DEFAULT),
 (DEFAULT, "JGomez", "1982-10-12", "Julian234g@gmail.com", "$2a$10$sNYsvrzqbKNETXmsmVp9LuPSi6fqzqjCyBOutHcWdZoX9CVb4lY3u", "juana.jpg", DEFAULT, DEFAULT),
