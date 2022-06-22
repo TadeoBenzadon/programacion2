@@ -5,7 +5,12 @@ const Usuario = db.User;
 
 const usuariosController = { 
     login: function(req, res){
-        return res.render('login');
+        if(req.session.user != undefined ){
+            return res.redirect('/')
+        }
+        else {
+            return res.render('login');
+        }    
     },
     
     logout: function(req,res){
@@ -20,28 +25,18 @@ const usuariosController = {
     },
 
     signIn: function(req,res){
-        // let errors = {};
         Usuario.findOne({
             where: { email: req.body.email}
         })
             .then(function(user){
                 //return res.send(user)
-                let errors= {}
                 req.session.user = user
-                if(req.body.password != user.password){
-                    errors.message = "El usuario o la contraseña son incorrectos"
-                    res.locals.errors = errors
-                    console.log(errors);
-                    return res.render('login')
-                }
-                else{
                 //preguntar si el usuario tildó el checkbox 'recordarme''
                 res.cookie('userId', user.id, {maxAge: 1000*60*5})
                 return res.redirect('/')
-                }
-
-            })
-            .catch( error => console.log(error))        
+            })        
+            .catch( error => console.log(error))
+          
     }, 
     register: function(req,res){
         if(req.session.user !== undefined){
