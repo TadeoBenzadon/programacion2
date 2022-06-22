@@ -25,7 +25,7 @@ let cols= {
 }
     let config = {
         table_name: 'comments',
-        timesTamps: false,
+        timestamps: true,
         underscored: true,
     }
 

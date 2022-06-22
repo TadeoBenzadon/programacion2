@@ -109,10 +109,12 @@ const productController = {
             .then(data => {
                 console.log(data);
                 if (data == null || data == [] || data.length == 0) {
-                    console.log('No hay resultados');
+                    //console.log('No hay resultados');
                     return res.render('search', {
                         title: 'Resultados |Janise Market',
-                        respuesta: 'No se encontraron resultados para ' + infoABuscar 
+                        respuesta: 'No se encontraron resultados para ' + infoABuscar, 
+                        result: null , 
+                        infoABuscar: infoABuscar
                     });
                 }
                 return res.render('search', {

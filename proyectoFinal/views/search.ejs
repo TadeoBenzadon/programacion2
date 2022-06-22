@@ -15,12 +15,14 @@
 	<div class="container products-wrapper">
 		<div class="row">
 			
-			<div class="col-12">
-				<h2 class="products-title">Resultados de <em>"<%= result %>"</em></h2>
-			</div>
-			<% if (respuesta != '') { %>
-				<h2 style='color:red'><%= respuesta %> '<%= result %>'</h2>
-			  <% } %> 
+
+			<% if (result != null) { %>
+				<div class="col-12">
+					<h2 class="products-title">Resultados de <em>"<%= result %>"</em></h2>
+				</div>
+			  <% } else{%>
+				<h2 class="products-title">No hay resultados de <em>"<%= infoABuscar %>"</em></h2>
+				<%   }%>
 			<!-- Show the "ultimos" products -->
 			<% if (respuesta == "") { %>
 				<% for (const product of products) { %>
