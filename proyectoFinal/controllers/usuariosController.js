@@ -147,7 +147,7 @@ const usuariosController = {
         }
 
         if(req.file == undefined){
-            user.avatar = 'avatar-1654086189266.jpg'
+            user.avatar = req.session.user.avatar;
         } else {
             user.avatar = req.file.filename;
         }
